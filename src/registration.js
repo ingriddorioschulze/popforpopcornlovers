@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 export default class Registration extends React.Component {
     constructor(props) {
@@ -9,13 +10,21 @@ export default class Registration extends React.Component {
 
     submit(e) {
         e.preventDefault();
-        console.log(e.target.firstname.value);
-        console.log(e.target.lastname.value);
-        console.log(e.target.email.value);
-        console.log(e.target.password.value);
-        this.setState({
-            error: "Something went wrong. Please try again!"
-        });
+        axios
+            .post("/register", {
+                firstname: e.target.firstname.value,
+                lastname: e.target.lastname.value,
+                email: e.target.email.value,
+                password: e.target.password.value
+            })
+            .then(() => {
+                location.replace("/");
+            })
+            .catch(() => {
+                this.setState({
+                    error: "Something went wrong. Please try again!"
+                });
+            });
     }
 
     render() {

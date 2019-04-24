@@ -7,6 +7,13 @@ const csurf = require("csurf");
 
 const app = express();
 
+app.use(
+    cookieSession({
+        maxAge: 1000 * 60 * 60 * 24 * 24,
+        secret: `Isay:Hey!Whatisgoingon?`
+    })
+);
+
 app.use(compression());
 
 if (process.env.NODE_ENV != "production") {
@@ -31,16 +38,25 @@ if (process.env.NODE_ENV != "production") {
 // });
 
 app.use(express.static("./public"));
+app.use(express.json());
 
 ////////////////////WELCOME ROUTE////////////////////
-app.get("/welcome", (req, res) => {});
+
+app.get("/welcome", (req, res) => {
+    if (req.session.userId) {
+        res.redirect("/");
+    } else {
+        res.sendFile(__dirname + "/index.html");
+    }
+});
 
 ////////////////////REGISTER ROUTE////////////////////
+
 app.post("/register", (req, res) => {
     password
         .hashPassword(req.body.password)
         .then(hashedPassword => {
-            return db.saveUser(
+            return db.registerUser(
                 req.body.firstname,
                 req.body.lastname,
                 req.body.email,
@@ -49,16 +65,11 @@ app.post("/register", (req, res) => {
             );
         })
         .then(userId => {
-            req.session.user = {
-                // id: userId,
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                email: req.body.email
-            };
-            res.redirect("/profile");
+            req.session.userId = userId;
+            res.json({ id: userId });
         })
         .catch(() => {
-            res.redirect("/register?erroremail=email");
+            res.sendStatus(500);
         });
 });
 ////////////////////LOGIN ROUTE////////////////////
@@ -110,8 +121,12 @@ app.post("/logout", (req, res) => {
 });
 
 ////////////////////EVERYTHING ROUTE////////////////////
-app.get("*", function(req, res) {
-    res.sendFile(__dirname + "/index.html");
+app.get("*", (req, res) => {
+    if (!req.session.userId) {
+        res.redirect("/welcome");
+    } else {
+        res.sendFile(__dirname + "/index.html");
+    }
 });
 
 app.listen(8080, function() {

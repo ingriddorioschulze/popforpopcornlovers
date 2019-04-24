@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Welcome from "./welcome";
+import Logo from "./logo";
 
-// let elem;
+let elem;
 
-// if (location.pathname == "/welcome") {
-//     elem = <Welcome />;
-// } else {
-//     elem = <img src="/logo.gif" />;
-// }
+if (location.pathname == "/welcome") {
+    elem = <Welcome />;
+} else {
+    elem = <Logo />;
+}
 
-ReactDOM.render(<Welcome />, document.querySelector("main"));
+ReactDOM.render(elem, document.querySelector("main"));
