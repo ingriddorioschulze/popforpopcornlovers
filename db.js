@@ -20,3 +20,17 @@ exports.registerUser = function registerUser(
         return result.rows[0].id;
     });
 };
+
+exports.getUser = function(email_address) {
+    const q = `SELECT id, first_name, last_name, password
+    FROM users 
+    WHERE email_address = $1`;
+    const params = [email_address];
+    return db.query(q, params).then(result => {
+        if (result.rows.length === 0) {
+            return null;
+        } else {
+            return result.rows[0];
+        }
+    });
+};

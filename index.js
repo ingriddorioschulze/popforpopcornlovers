@@ -29,15 +29,15 @@ if (process.env.NODE_ENV != "production") {
 
 ////////////////////CSURF////////////////////
 
-// app.use(csurf());
+app.use(csurf());
 
-// app.use(function(req, res, next) {
-//     res.set("x-frame-option", "DENY");
-//     res.locals.csrfToken = req.csrfToken();
-//     next();
-// });
+app.use(function(req, res, next) {
+    res.cookie("mytoken", req.csrfToken());
+    next();
+});
 
 app.use(express.static("./public"));
+//app.use(require("body-parser").json());
 app.use(express.json());
 
 ////////////////////WELCOME ROUTE////////////////////
@@ -66,49 +66,29 @@ app.post("/register", (req, res) => {
         })
         .then(userId => {
             req.session.userId = userId;
-            res.json({ id: userId });
+            res.redirect("/");
         })
         .catch(() => {
             res.sendStatus(500);
         });
 });
 ////////////////////LOGIN ROUTE////////////////////
-app.get("/login", (req, res) => {
-    if (req.session.user !== undefined) {
-        res.redirect("/petition");
-    } else {
-        res.render("login", {
-            erroruser: req.query.erroruser,
-            errorpass: req.query.errorpass
-        });
-    }
-});
 
 app.post("/login", (req, res) => {
     db.getUser(req.body.email).then(user => {
         if (user == null) {
-            return res.redirect("/login?erroruser=usernotfound");
+            return res.status(400).json({ error: "user not found" });
         }
 
         password
             .checkPassword(req.body.password, user.password)
             .then(doesMatch => {
                 if (doesMatch == true) {
-                    req.session.user = {
-                        id: user.user_id,
-                        firstname: user.first_name,
-                        lastname: user.last_name
-                        //missing infos//
-                    };
-                    if (user.profile_id == null) {
-                        res.redirect("/profile");
-                    } else if (user.signature_id == null) {
-                        res.redirect("/petition");
-                    } else {
-                        res.redirect("/petition/signed");
-                    }
+                    req.session.userId = user.id;
+
+                    res.redirect("/");
                 } else {
-                    res.redirect("/login?errorpass=wrongpassword");
+                    res.status(400).json({ error: "wrong password" });
                 }
             });
     });
@@ -120,6 +100,10 @@ app.post("/logout", (req, res) => {
     res.redirect("/register");
 });
 
+////////////////////USERS ROUTE////////////////////
+app.post("/login", (req, res) => {
+    db.getUser(req.body.email).then(user => {});
+});
 ////////////////////EVERYTHING ROUTE////////////////////
 app.get("*", (req, res) => {
     if (!req.session.userId) {

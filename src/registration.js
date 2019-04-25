@@ -1,5 +1,6 @@
 import React from "react";
-import axios from "axios";
+import axios from "./axios";
+import { Link } from "react-router-dom";
 
 export default class Registration extends React.Component {
     constructor(props) {
@@ -38,41 +39,44 @@ export default class Registration extends React.Component {
         return (
             <React.Fragment>
                 {errorDiv}
-                <form onSubmit={this.submit}>
-                    <input
-                        name="firstname"
-                        className="firstname"
-                        type="text"
-                        placeholder="first name"
-                        required
-                    />
-                    <input
-                        name="lastname"
-                        className="lastname"
-                        type="text"
-                        placeholder="last name"
-                        required
-                    />
-                    <input
-                        name="email"
-                        className="email"
-                        type="text"
-                        placeholder="email"
-                        required
-                    />
-                    <input
-                        name="password"
-                        className="password"
-                        type="password"
-                        placeholder="password"
-                        required
-                    />
-                    <button className="register-button" type="submit">
-                        Register
-                    </button>
-                </form>
-                <div className="Login">
-                    Already a member? <a href="">Log in</a>
+                <div className="welcome-text-two">Join the social network!</div>
+                <div className="register-container">
+                    <form className="register-form" onSubmit={this.submit}>
+                        <input
+                            name="firstname"
+                            className="firstname"
+                            type="text"
+                            placeholder="first name"
+                            required
+                        />
+                        <input
+                            name="lastname"
+                            className="lastname"
+                            type="text"
+                            placeholder="last name"
+                            required
+                        />
+                        <input
+                            name="email"
+                            className="email"
+                            type="text"
+                            placeholder="email"
+                            required
+                        />
+                        <input
+                            name="password"
+                            className="password"
+                            type="password"
+                            placeholder="password"
+                            required
+                        />
+                        <button className="register-button" type="submit">
+                            Register
+                        </button>
+                    </form>
+                </div>
+                <div className="login-text">
+                    Already a member? <Link to="/login">Log in</Link>
                 </div>
             </React.Fragment>
         );

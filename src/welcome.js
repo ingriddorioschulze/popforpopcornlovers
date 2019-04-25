@@ -1,16 +1,20 @@
 import React from "react";
+import { HashRouter, Route } from "react-router-dom";
 import Registration from "./registration";
+import Login from "./login";
 
 const Welcome = () => {
     return (
-        <div>
+        <div className="welcome-container">
             <div className="welcome-title">Welcome to</div>
             <img className="welcome-image" src="" alt="logo" />
-            <div className="welcome-text">
-                Small text explaining the social network
-            </div>
-            <div className="welcome-text-two">Join the social network!</div>
-            <Registration />
+            <div className="welcome-text">About the social network.</div>
+            <HashRouter>
+                <div>
+                    <Route exact path="/" component={Registration} />
+                    <Route path="/login" component={Login} />
+                </div>
+            </HashRouter>
         </div>
     );
 };
