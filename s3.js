@@ -9,7 +9,7 @@ if (process.env.NODE_ENV == "production") {
 const client = knox.createClient({
     key: secrets.AWS_KEY,
     secret: secrets.AWS_SECRET,
-    bucket: "retratar/genau",
+    bucket: "retratar",
     region: "eu-west-1"
 });
 
@@ -17,7 +17,7 @@ exports.uploadImage = function(filepath, filename) {
     return new Promise((resolve, reject) => {
         client.putFile(
             filepath,
-            filename,
+            `genau/${filename}`,
             {
                 "x-amz-acl": "public-read"
             },

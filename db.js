@@ -44,3 +44,11 @@ exports.getUserData = function(id) {
         return result.rows[0];
     });
 };
+
+exports.updateProfilePicture = function(user_image, id) {
+    const q = `UPDATE users
+    SET users_image = $1
+    WHERE id = $2`;
+    const params = [user_image, id];
+    return db.query(q, params);
+};

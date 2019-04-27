@@ -31,8 +31,11 @@ export default class App extends React.Component {
                 />
                 {this.state.isUploaderVisible && (
                     <Uploader
-                        setImage={image =>
-                            this.setState({ image, isUploaderVisible: false })
+                        setImage={users_image =>
+                            this.setState({
+                                users_image,
+                                isUploaderVisible: false
+                            })
                         }
                     />
                 )}
