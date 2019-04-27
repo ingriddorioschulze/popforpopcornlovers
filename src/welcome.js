@@ -7,7 +7,7 @@ const Welcome = () => {
     return (
         <div className="welcome-container">
             <div className="welcome-title">Welcome to</div>
-            <img className="welcome-image" src="" alt="logo" />
+            <img className="welcome-image" src="/genau.png" alt="logo" />
             <div className="welcome-text">About the social network.</div>
             <HashRouter>
                 <div>

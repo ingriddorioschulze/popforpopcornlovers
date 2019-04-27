@@ -49,7 +49,7 @@ export default class Login extends React.Component {
                         <input
                             name="password"
                             className="password"
-                            type="text"
+                            type="password"
                             placeholder="password"
                             required
                         />

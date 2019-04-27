@@ -34,3 +34,13 @@ exports.getUser = function(email_address) {
         }
     });
 };
+
+exports.getUserData = function(id) {
+    const q = `SELECT id, first_name, last_name, users_image
+    FROM users
+    WHERE id = $1`;
+    const params = [id];
+    return db.query(q, params).then(result => {
+        return result.rows[0];
+    });
+};

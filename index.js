@@ -100,10 +100,21 @@ app.post("/logout", (req, res) => {
     res.redirect("/register");
 });
 
+function loggedIn(req, res, next) {
+    if (req.session.userId) {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
+}
+
 ////////////////////USERS ROUTE////////////////////
-app.post("/login", (req, res) => {
-    db.getUser(req.body.email).then(user => {});
+app.get("/users", loggedIn, (req, res) => {
+    db.getUserData(req.session.userId).then(usersImage => {
+        res.json(usersImage);
+    });
 });
+
 ////////////////////EVERYTHING ROUTE////////////////////
 app.get("*", (req, res) => {
     if (!req.session.userId) {
