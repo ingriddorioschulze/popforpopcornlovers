@@ -6,5 +6,12 @@ export default function ProfilePic({
     lastname,
     clickHandler
 }) {
-    return <img onClick={clickHandler} src={image || "/default.jpg"} />;
+    return (
+        <img
+            className="profile-picture-image"
+            onClick={clickHandler}
+            src={image || "/default.jpg"}
+            alt={`${firstname} ${lastname}`}
+        />
+    );
 }

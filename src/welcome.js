@@ -2,12 +2,13 @@ import React from "react";
 import { HashRouter, Route } from "react-router-dom";
 import Registration from "./registration";
 import Login from "./login";
+import Logo from "./logo";
 
 const Welcome = () => {
     return (
         <div className="welcome-container">
             <div className="welcome-title">Welcome to</div>
-            <img className="welcome-image" src="/genau.png" alt="logo" />
+            <Logo />
             <div className="welcome-text">About the social network.</div>
             <HashRouter>
                 <div>

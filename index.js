@@ -165,6 +165,14 @@ app.post(
     }
 );
 
+////////////////////BIO ROUTE////////////////////
+
+app.put("/editbio", loggedIn, (req, res) => {
+    db.updateBio(req.body.bio, req.session.userId).then(() => {
+        res.sendStatus(200);
+    });
+});
+
 ////////////////////EVERYTHING ROUTE////////////////////
 
 app.get("*", (req, res) => {
@@ -176,5 +184,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(8080, function() {
-    console.log("I'm listening.");
+    console.log("Oi, genau!");
 });

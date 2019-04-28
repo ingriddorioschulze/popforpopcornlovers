@@ -36,7 +36,7 @@ exports.getUser = function(email_address) {
 };
 
 exports.getUserData = function(id) {
-    const q = `SELECT id, first_name, last_name, users_image
+    const q = `SELECT id, first_name, last_name, users_image, bio
     FROM users
     WHERE id = $1`;
     const params = [id];
@@ -50,5 +50,13 @@ exports.updateProfilePicture = function(user_image, id) {
     SET users_image = $1
     WHERE id = $2`;
     const params = [user_image, id];
+    return db.query(q, params);
+};
+
+exports.updateBio = function(bio, id) {
+    const q = `UPDATE users
+    SET bio = $1
+    WHERE id = $2`;
+    const params = [bio, id];
     return db.query(q, params);
 };

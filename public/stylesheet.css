@@ -7,6 +7,7 @@
 
 body {
     background-color: #ffa000;
+    margin: 0;
 }
 
 /* ///////WELCOME/////// */
@@ -22,7 +23,7 @@ body {
     font-size: 30px;
 }
 
-.welcome-image {
+.welcome-container .logo {
     width: 50%;
     margin-top: 20px;
 }
@@ -185,12 +186,33 @@ body {
 
 /* ///////LOGO/////// */
 
-.logo-container {
+/* ///////LOGGED IN/////// */
+
+/* /////// APP /////// */
+
+.app {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+}
+.app-header {
+    display: flex;
+    flex-direction: row;
+    height: 20vh;
+    justify-content: space-between;
+    width: 100vw;
 }
 
-.logo-logo {
+.app-header .logo {
+    height: 100%;
+}
+
+.app-header .profile-picture-image {
+    height: 70%;
+}
+
+.profile {
+    height: 400px;
+}
+.profile .profile-picture-image {
+    height: 30%;
 }

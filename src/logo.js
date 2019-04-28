@@ -1,9 +1,5 @@
 import React from "react";
 
-const Logo = () => (
-    <div className="logo-container">
-        <img className="logo-logo" src="/genau.png" alt="logo" />
-    </div>
-);
+const Logo = () => <img className="logo" src="/genau.png" alt="logo" />;
 
 export default Logo;
