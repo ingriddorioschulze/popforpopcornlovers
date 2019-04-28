@@ -173,6 +173,22 @@ app.put("/editbio", loggedIn, (req, res) => {
     });
 });
 
+////////////////////OTHER USERS ROUTE////////////////////
+
+app.get("/api/user/:id", loggedIn, (req, res) => {
+    db.getUserData(req.params.id)
+        .then(userData => {
+            if (!userData) {
+                res.sendStatus(404);
+            } else {
+                res.json(userData);
+            }
+        })
+        .catch(() => {
+            res.sendStatus(404);
+        });
+});
+
 ////////////////////EVERYTHING ROUTE////////////////////
 
 app.get("*", (req, res) => {

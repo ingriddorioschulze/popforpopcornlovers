@@ -5,6 +5,8 @@ import Uploader from "./uploader";
 import Logo from "./logo";
 import Profile from "./profile";
 import BioEditor from "./bioeditor";
+import OtherProfile from "./otherprofile";
+import { BrowserRouter, Route } from "react-router-dom";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -34,21 +36,32 @@ export default class App extends React.Component {
                     <Logo />
                     {profilePic}
                 </header>
-                <Profile
-                    profilePic={profilePic}
-                    firstname={this.state.first_name}
-                    lastname={this.state.last_name}
-                    bioEditor={
-                        <BioEditor
-                            bio={this.state.bio}
-                            setBio={bio =>
-                                this.setState({
-                                    bio
-                                })
-                            }
+                <BrowserRouter>
+                    <div>
+                        <Route
+                            exact
+                            path="/"
+                            render={() => (
+                                <Profile
+                                    profilePic={profilePic}
+                                    firstname={this.state.first_name}
+                                    lastname={this.state.last_name}
+                                    bioEditor={
+                                        <BioEditor
+                                            bio={this.state.bio}
+                                            setBio={bio =>
+                                                this.setState({
+                                                    bio
+                                                })
+                                            }
+                                        />
+                                    }
+                                />
+                            )}
                         />
-                    }
-                />
+                        <Route path="/user/:id" component={OtherProfile} />
+                    </div>
+                </BrowserRouter>
 
                 {this.state.isUploaderVisible && (
                     <Uploader
