@@ -37,9 +37,11 @@ export default class BioEditor extends React.Component {
                         }}
                         value={this.state.draft}
                     />
-                    <button className="bio-save-button" onClick={this.save}>
-                        Save
-                    </button>
+                    <div>
+                        <button className="bio-save-button" onClick={this.save}>
+                            Save
+                        </button>
+                    </div>
                 </div>
             );
         }
@@ -49,12 +51,14 @@ export default class BioEditor extends React.Component {
             return (
                 <div className="bio-edit">
                     {this.props.bio}
-                    <button
-                        className="bio-edit-button"
-                        onClick={this.switchToEdit}
-                    >
-                        Edit
-                    </button>
+                    <div>
+                        <button
+                            className="bio-edit-button"
+                            onClick={this.switchToEdit}
+                        >
+                            Edit
+                        </button>
+                    </div>
                 </div>
             );
         }

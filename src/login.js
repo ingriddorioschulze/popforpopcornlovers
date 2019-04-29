@@ -36,27 +36,29 @@ export default class Login extends React.Component {
         return (
             <React.Fragment>
                 {errorDiv}
-                <div className="login-title">Log in</div>
-                <div className="login-container">
-                    <form className="login-form" onSubmit={this.submit}>
-                        <input
-                            name="email"
-                            className="email"
-                            type="text"
-                            placeholder="email"
-                            required
-                        />
-                        <input
-                            name="password"
-                            className="password"
-                            type="password"
-                            placeholder="password"
-                            required
-                        />
-                        <button className="login-button" type="submit">
-                            Log in
-                        </button>
-                    </form>
+                <div className="login-area">
+                    <div className="login-container">
+                        <div className="login-title">Login</div>
+                        <form className="login-form" onSubmit={this.submit}>
+                            <input
+                                name="email"
+                                className="email"
+                                type="text"
+                                placeholder="email"
+                                required
+                            />
+                            <input
+                                name="password"
+                                className="password"
+                                type="password"
+                                placeholder="password"
+                                required
+                            />
+                            <button className="login-button" type="submit">
+                                login
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </React.Fragment>
         );

@@ -1,7 +1,6 @@
 * {
     box-sizing: border-box;
-    font-family: Ubuntu;
-    font-weight: 300;
+    font-family: Poiret One;
     color: #212121;
 }
 
@@ -86,17 +85,17 @@ body {
 }
 
 ::placeholder {
-    font-size: 12px;
+    font-size: 13px;
     text-align: center;
     color: #212121;
 }
 
 .register-button {
-    font-size: 15px;
+    font-size: 13px;
     color: black;
     height: 35px;
     width: 150px;
-    border: 1px solid #444444;
+    border: 1px solid #212121;
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -107,7 +106,7 @@ body {
 .password:hover,
 .register-button:hover {
     border: 2px solid;
-    border-color: #444444;
+    border-color: #212121;
     font-weight: bold;
 }
 
@@ -124,10 +123,21 @@ body {
 
 /* ///////LOGIN/////// */
 
+.login-area {
+    height: 300px;
+    width: 350px;
+    background-color: white;
+    margin-top: 40px;
+    border-radius: 6px;
+    border: 2px solid black;
+}
 .login-title {
     text-align: center;
+    font-size: 30px;
+    font-weight: bold;
     margin-bottom: 30px;
     margin-top: 30px;
+    font-family: Sacramento;
 }
 
 .login-container {
@@ -147,24 +157,28 @@ body {
 .email {
     height: 35px;
     width: 248px;
-    border: 1px solid #212121;
+    border: 2px solid #212121;
+    border-radius: 6px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 .password {
     height: 35px;
     width: 248px;
-    border: 1px solid #212121;
+    border: 2px solid #212121;
+    border-radius: 6px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 .login-button {
-    font-size: 15px;
+    font-size: 13px;
+    font-weight: bold;
     color: black;
     height: 35px;
-    width: 150px;
-    border: 1px solid #444444;
+    width: 90px;
+    border: 2px solid #212121;
+    border-radius: 6px;
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -172,8 +186,8 @@ body {
 .email:hover,
 .password:hover,
 .login-button:hover {
-    border: 2px solid;
-    border-color: #444444;
+    border: 3px solid;
+    border-color: #212121;
     font-weight: bold;
 }
 
@@ -204,10 +218,14 @@ body {
 
 .app-header .logo {
     height: 100%;
+    margin-left: 20px;
+    margin-top: 20px;
 }
 
 .app-header .profile-picture-image {
-    height: 70%;
+    height: 60%;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 
 .profile {
@@ -215,4 +233,46 @@ body {
 }
 .profile .profile-picture-image {
     height: 30%;
+    margin-left: 20px;
+    margin-top: 70px;
+}
+.profile-name {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.bio-edit {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.bio-edit-button {
+    font-size: 15px;
+    color: black;
+    height: 30px;
+    width: 75px;
+    border: 1px solid #444444;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.bio-save-textarea {
+    margin-left: 20px;
+    margin-top: 20px;
+    height: 70px;
+    width: 30%;
+}
+
+.bio-save-button {
+    font-size: 15px;
+    color: black;
+    height: 30px;
+    width: 75px;
+    border: 1px solid #444444;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 20px;
 }
