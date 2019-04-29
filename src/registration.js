@@ -39,44 +39,49 @@ export default class Registration extends React.Component {
         return (
             <React.Fragment>
                 {errorDiv}
-                <div className="welcome-text-two">Join the social network!</div>
-                <div className="register-container">
-                    <form className="register-form" onSubmit={this.submit}>
-                        <input
-                            name="firstname"
-                            className="firstname"
-                            type="text"
-                            placeholder="first name"
-                            required
-                        />
-                        <input
-                            name="lastname"
-                            className="lastname"
-                            type="text"
-                            placeholder="last name"
-                            required
-                        />
-                        <input
-                            name="email"
-                            className="email"
-                            type="text"
-                            placeholder="email"
-                            required
-                        />
-                        <input
-                            name="password"
-                            className="password"
-                            type="password"
-                            placeholder="password"
-                            required
-                        />
-                        <button className="register-button" type="submit">
-                            Register
-                        </button>
-                    </form>
-                </div>
-                <div className="login-text">
-                    Already a member? <Link to="/login">Log in</Link>
+                <div className="register-area">
+                    <div className="register-container">
+                        <div className="register-text">register</div>
+                        <form className="register-form" onSubmit={this.submit}>
+                            <input
+                                name="firstname"
+                                className="register-firstname"
+                                type="text"
+                                placeholder="first name"
+                                required
+                            />
+                            <input
+                                name="lastname"
+                                className="register-lastname"
+                                type="text"
+                                placeholder="last name"
+                                required
+                            />
+                            <input
+                                name="email"
+                                className="register-email"
+                                type="text"
+                                placeholder="email"
+                                required
+                            />
+                            <input
+                                name="password"
+                                className="register-password"
+                                type="password"
+                                placeholder="password"
+                                required
+                            />
+                            <button className="register-button" type="submit">
+                                register
+                            </button>
+                        </form>
+                        <div className="register-login-text">
+                            Already a member?{" "}
+                            <b>
+                                <Link to="/login">Login</Link>
+                            </b>
+                        </div>
+                    </div>
                 </div>
             </React.Fragment>
         );

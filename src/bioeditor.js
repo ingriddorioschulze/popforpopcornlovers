@@ -31,34 +31,34 @@ export default class BioEditor extends React.Component {
             return (
                 <div className="bio-save">
                     <textarea
+                        placeholder="write your bio here"
+                        cols="50"
+                        rows="2"
                         className="bio-save-textarea"
                         onChange={e => {
                             this.setState({ draft: e.target.value });
                         }}
                         value={this.state.draft}
                     />
-                    <div>
-                        <button className="bio-save-button" onClick={this.save}>
-                            Save
-                        </button>
-                    </div>
+                    <button className="bio-save-button" onClick={this.save}>
+                        save
+                    </button>
                 </div>
             );
         }
         if (!this.props.bio) {
-            return <button onClick={this.switchToEdit}>Add Bio</button>;
+            return <button onClick={this.switchToEdit}>add bio</button>;
         } else {
             return (
                 <div className="bio-edit">
                     {this.props.bio}
-                    <div>
-                        <button
-                            className="bio-edit-button"
-                            onClick={this.switchToEdit}
-                        >
-                            Edit
-                        </button>
-                    </div>
+
+                    <button
+                        className="bio-edit-button"
+                        onClick={this.switchToEdit}
+                    >
+                        edit
+                    </button>
                 </div>
             );
         }

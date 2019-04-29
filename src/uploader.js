@@ -24,16 +24,29 @@ export default class Uploader extends React.Component {
 
     render() {
         return (
-            <div className="upload-image-container">
-                <div>Choose image</div>
-                <input
-                    onChange={this.uploadProfilePicture}
-                    className="upload-image-input"
-                    name="upload-image"
-                    type="file"
-                    accept="image/*"
-                />
-                <div className="upload-image-modal-close">&times;</div>
+            <div className="upload-image-area">
+                <div className="upload-image-container">
+                    <div className="upload-image-text">
+                        edit your profile picture
+                    </div>
+                    <input
+                        onChange={this.uploadProfilePicture}
+                        className="upload-image-input"
+                        name="upload-image"
+                        id="file"
+                        type="file"
+                        accept="image/*"
+                    />
+                    <label htmlFor="file">
+                        <span className="choose-file">choose a file</span>
+                    </label>
+                    <div
+                        onClick={this.props.closeModal}
+                        className="upload-image-modal-close"
+                    >
+                        &times;
+                    </div>
+                </div>
             </div>
         );
     }

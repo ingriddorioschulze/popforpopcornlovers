@@ -9,8 +9,10 @@ export default function Profile({
     return (
         <div className="profile">
             {profilePic}
-            <div className="profile-name">{`${firstname} ${lastname}`}</div>
-            {bioEditor}
+            <div>
+                <div className="profile-name">{`${firstname} ${lastname}`}</div>
+                {bioEditor}
+            </div>
         </div>
     );
 }

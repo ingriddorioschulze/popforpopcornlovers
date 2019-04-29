@@ -65,6 +65,11 @@ export default class App extends React.Component {
 
                 {this.state.isUploaderVisible && (
                     <Uploader
+                        closeModal={() =>
+                            this.setState({
+                                isUploaderVisible: false
+                            })
+                        }
                         setImage={users_image =>
                             this.setState({
                                 users_image,

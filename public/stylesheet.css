@@ -13,31 +13,58 @@ body {
 
 .welcome-container {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-left {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-right {
+    display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 .welcome-title {
-    font-size: 30px;
+    font-size: 40px;
+    font-weight: bold;
 }
 
 .welcome-container .logo {
-    width: 50%;
-    margin-top: 20px;
+    width: 60%;
+    margin-top: 15px;
 }
 
 .welcome-text {
     font-size: 20px;
+    font-weight: bold;
     margin-bottom: 20px;
+    margin-top: 70px;
 }
 .welcome-text-two {
-    margin-top: 20px;
+    margin-top: 70px;
     margin-bottom: 40px;
     text-align: center;
 }
 
 /* ///////REGISTRATION/////// */
+
+.register-area {
+    height: 500px;
+    width: 350px;
+    margin-top: 40px;
+    border-radius: 6px;
+    border: 2px solid black;
+}
 
 .register-container {
     display: flex;
@@ -53,59 +80,86 @@ body {
     align-items: center;
 }
 
-.firstname {
-    height: 35px;
-    width: 248px;
-    border: 1px solid #212121;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.lastname {
-    height: 35px;
-    width: 248px;
-    border: 1px solid #212121;
-    margin-top: 10px;
-    margin-bottom: 10px;
+.register-text {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    font-family: Sacramento;
 }
 
-.email {
+.register-firstname {
     height: 35px;
     width: 248px;
-    border: 1px solid #212121;
+    border-radius: 6px;
+    border: 2px solid #212121;
     margin-top: 10px;
     margin-bottom: 10px;
+    background: transparent;
 }
 
-.password {
+.register-lastname {
     height: 35px;
     width: 248px;
-    border: 1px solid #212121;
+    border-radius: 6px;
+    border: 2px solid #212121;
     margin-top: 10px;
     margin-bottom: 10px;
+    background: transparent;
+}
+
+.register-email {
+    height: 35px;
+    width: 248px;
+    border-radius: 6px;
+    border: 2px solid #212121;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: transparent;
+}
+
+.register-password {
+    height: 35px;
+    width: 248px;
+    border-radius: 6px;
+    border: 2px solid #212121;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: transparent;
 }
 
 ::placeholder {
     font-size: 13px;
+    font-weight: bold;
     text-align: center;
     color: #212121;
 }
 
 .register-button {
     font-size: 13px;
+    font-weight: bold;
     color: black;
     height: 35px;
-    width: 150px;
-    border: 1px solid #212121;
+    width: 90px;
+    border-radius: 6px;
+    border: 2px solid #212121;
     margin-top: 30px;
     margin-bottom: 30px;
+    background: transparent;
 }
 
-.firstname:hover,
-.lastname:hover,
-.email:hover,
-.password:hover,
+.register-login-text {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.register-firstname:hover,
+.register-lastname:hover,
+.register-email:hover,
+.register-password:hover,
 .register-button:hover {
-    border: 2px solid;
+    border: 3px solid;
     border-color: #212121;
     font-weight: bold;
 }
@@ -117,16 +171,11 @@ body {
     text-align: center;
 }
 
-.login-text {
-    text-align: center;
-}
-
 /* ///////LOGIN/////// */
 
 .login-area {
-    height: 300px;
+    height: 315px;
     width: 350px;
-    background-color: white;
     margin-top: 40px;
     border-radius: 6px;
     border: 2px solid black;
@@ -154,21 +203,23 @@ body {
     align-items: center;
 }
 
-.email {
+.login-email {
     height: 35px;
     width: 248px;
     border: 2px solid #212121;
     border-radius: 6px;
     margin-top: 10px;
     margin-bottom: 10px;
+    background: transparent;
 }
-.password {
+.login-password {
     height: 35px;
     width: 248px;
     border: 2px solid #212121;
     border-radius: 6px;
     margin-top: 10px;
     margin-bottom: 10px;
+    background: transparent;
 }
 
 .login-button {
@@ -181,10 +232,11 @@ body {
     border-radius: 6px;
     margin-top: 30px;
     margin-bottom: 30px;
+    background: transparent;
 }
 
-.email:hover,
-.password:hover,
+.login-email:hover,
+.login-password:hover,
 .login-button:hover {
     border: 3px solid;
     border-color: #212121;
@@ -198,10 +250,6 @@ body {
     text-align: center;
 }
 
-/* ///////LOGO/////// */
-
-/* ///////LOGGED IN/////// */
-
 /* /////// APP /////// */
 
 .app {
@@ -211,37 +259,42 @@ body {
 .app-header {
     display: flex;
     flex-direction: row;
-    height: 20vh;
+    height: 200px;
     justify-content: space-between;
     width: 100vw;
+    padding: 30px;
 }
 
 .app-header .logo {
     height: 100%;
-    margin-left: 20px;
-    margin-top: 20px;
 }
 
 .app-header .profile-picture-image {
     height: 60%;
-    margin-right: 20px;
-    margin-top: 20px;
+    border: 2px solid black;
+    border-radius: 6px;
 }
+
+/* /////// PROFILE /////// */
 
 .profile {
     height: 400px;
+    display: flex;
 }
+
 .profile .profile-picture-image {
     height: 30%;
     margin-left: 20px;
-    margin-top: 70px;
+    border: 2px solid black;
+    border-radius: 6px;
 }
 .profile-name {
     margin-left: 20px;
-    margin-top: 20px;
     font-size: 30px;
     font-weight: bold;
 }
+
+/* /////// BIO /////// */
 
 .bio-edit {
     margin-left: 20px;
@@ -250,29 +303,90 @@ body {
 }
 
 .bio-edit-button {
-    font-size: 15px;
-    color: black;
-    height: 30px;
-    width: 75px;
-    border: 1px solid #444444;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    font-size: 25px;
+    border: none;
+    background: none;
+    font-family: Sacramento;
 }
 
 .bio-save-textarea {
     margin-left: 20px;
     margin-top: 20px;
-    height: 70px;
-    width: 30%;
+    margin-bottom: 20px;
+    /* border: none; */
+    background: none;
+    font-size: 15px;
+    border: 1px solid black;
+    resize: none;
 }
 
 .bio-save-button {
-    font-size: 15px;
-    color: black;
-    height: 30px;
-    width: 75px;
-    border: 1px solid #444444;
-    margin-top: 30px;
+    font-size: 25px;
+    border: none;
+    background: none;
+    font-family: Sacramento;
+}
+
+/* /////// UPLOAD IMAGE MODAL /////// */
+
+.upload-image-area {
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.upload-image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 350px;
+    border-radius: 6px;
+    border: 2px solid black;
+    background-color: #ffa000;
+}
+
+.upload-image-text {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
     margin-bottom: 30px;
-    margin-left: 20px;
+    margin-top: 30px;
+    font-family: Sacramento;
+}
+
+.upload-image-modal-close {
+    /* position: absolute; */
+    right: 35px;
+    top: 5px;
+    cursor: pointer;
+    font-size: 60px;
+}
+
+.upload-image-input {
+    height: 0.1px;
+    width: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.upload-image-input + label {
+    height: 30px;
+    width: 30%;
+    font-size: 12px;
+    color: black;
+    border: 2px solid black;
+    background: transparent;
+    border-radius: 6px;
+    padding: 5px 18px;
+    white-space: nowrap;
 }

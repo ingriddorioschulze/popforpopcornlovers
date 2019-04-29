@@ -38,18 +38,18 @@ export default class Login extends React.Component {
                 {errorDiv}
                 <div className="login-area">
                     <div className="login-container">
-                        <div className="login-title">Login</div>
+                        <div className="login-title">login</div>
                         <form className="login-form" onSubmit={this.submit}>
                             <input
                                 name="email"
-                                className="email"
+                                className="login-email"
                                 type="text"
                                 placeholder="email"
                                 required
                             />
                             <input
                                 name="password"
-                                className="password"
+                                className="login-password"
                                 type="password"
                                 placeholder="password"
                                 required
