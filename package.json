@@ -34,6 +34,7 @@
         "jest": "^24.7.1",
         "knox-s3": "^0.9.5",
         "multer": "^1.3.0",
+        "popmotion": "^8.6.9",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
         "react-redux": "^5.0.5",

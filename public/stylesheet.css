@@ -427,3 +427,11 @@ body {
     padding: 5px 18px;
     white-space: nowrap;
 }
+
+.popcorn-machine-origin {
+    position: relative;
+}
+
+.kernel {
+    position: absolute;
+}
