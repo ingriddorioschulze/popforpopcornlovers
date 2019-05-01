@@ -5,16 +5,38 @@ export default class OtherProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.loadUser = this.loadUser.bind(this);
     }
 
-    componentDidMount() {
+    loadUser() {
         axios
             .get(`/api/user/${this.props.match.params.id}`)
             .then(({ data }) => {
-                this.setState(data);
+                this.setState({ notFound: false, ...data });
+            })
+            .catch(err => {
+                if (err.response.status === 400) {
+                    this.props.history.push("/");
+                } else if (err.response.status === 404) {
+                    this.setState({ notFound: true });
+                }
             });
     }
+
+    componentDidMount() {
+        this.loadUser();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.id != prevProps.match.params.id) {
+            this.loadUser();
+        }
+    }
+
     render() {
+        if (this.state.notFound) {
+            return <h1>NOT FOUND</h1>;
+        }
         if (!this.state.first_name) {
             return null;
         }

@@ -7,6 +7,7 @@ import Profile from "./profile";
 import BioEditor from "./bioeditor";
 import OtherProfile from "./otherprofile";
 import { BrowserRouter, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -31,12 +32,14 @@ export default class App extends React.Component {
             />
         );
         return (
-            <div className="app">
-                <header className="app-header">
-                    <Logo />
-                    {profilePic}
-                </header>
-                <BrowserRouter>
+            <BrowserRouter>
+                <div className="app">
+                    <header className="app-header">
+                        <Link to="/">
+                            <Logo />
+                        </Link>
+                        {profilePic}
+                    </header>
                     <div>
                         <Route
                             exact
@@ -61,24 +64,24 @@ export default class App extends React.Component {
                         />
                         <Route path="/user/:id" component={OtherProfile} />
                     </div>
-                </BrowserRouter>
 
-                {this.state.isUploaderVisible && (
-                    <Uploader
-                        closeModal={() =>
-                            this.setState({
-                                isUploaderVisible: false
-                            })
-                        }
-                        setImage={users_image =>
-                            this.setState({
-                                users_image,
-                                isUploaderVisible: false
-                            })
-                        }
-                    />
-                )}
-            </div>
+                    {this.state.isUploaderVisible && (
+                        <Uploader
+                            closeModal={() =>
+                                this.setState({
+                                    isUploaderVisible: false
+                                })
+                            }
+                            setImage={users_image =>
+                                this.setState({
+                                    users_image,
+                                    isUploaderVisible: false
+                                })
+                            }
+                        />
+                    )}
+                </div>
+            </BrowserRouter>
         );
     }
 }

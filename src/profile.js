@@ -8,10 +8,12 @@ export default function Profile({
 }) {
     return (
         <div className="profile">
-            {profilePic}
-            <div>
-                <div className="profile-name">{`${firstname} ${lastname}`}</div>
-                {bioEditor}
+            <div className="profile-area">
+                {profilePic}
+                <div>
+                    <div className="profile-name">{`${firstname} ${lastname}`}</div>
+                    {bioEditor}
+                </div>
             </div>
         </div>
     );

@@ -176,6 +176,9 @@ app.put("/editbio", loggedIn, (req, res) => {
 ////////////////////OTHER USERS ROUTE////////////////////
 
 app.get("/api/user/:id", loggedIn, (req, res) => {
+    if (req.session.userId == req.params.id) {
+        return res.status(400).json({ error: "Can't access yourself!" });
+    }
     db.getUserData(req.params.id)
         .then(userData => {
             if (!userData) {
@@ -200,5 +203,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(8080, function() {
-    console.log("Oi, genau!");
+    console.log("Oi, pop!");
 });

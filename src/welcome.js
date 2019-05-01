@@ -7,21 +7,15 @@ import Logo from "./logo";
 const Welcome = () => {
     return (
         <div className="welcome-container">
-            <div className="welcome-left">
-                <div className="welcome-title">welcome to</div>
-                <Logo />
-            </div>
-            <div className="welcome-right">
-                <div className="welcome-text">
-                    make friends. share. be social.
+            <div className="welcome-title">welcome to</div>
+            <Logo />
+            <div className="welcome-text">for popcorn lovers.</div>
+            <HashRouter>
+                <div>
+                    <Route exact path="/" component={Registration} />
+                    <Route path="/login" component={Login} />
                 </div>
-                <HashRouter>
-                    <div>
-                        <Route exact path="/" component={Registration} />
-                        <Route path="/login" component={Login} />
-                    </div>
-                </HashRouter>
-            </div>
+            </HashRouter>
         </div>
     );
 };
