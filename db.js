@@ -60,3 +60,37 @@ exports.updateBio = function(bio, id) {
     const params = [bio, id];
     return db.query(q, params);
 };
+
+exports.getFriendRequest = function(user1_id, user2_id) {
+    const q = `SELECT id_sender, id_recipient, request_accepted, accepted_on
+    FROM friends
+    WHERE (id_sender = $1 AND id_recipient = $2) 
+    OR (id_recipient = $1 AND id_sender = $2)`;
+    const params = [user1_id, user2_id];
+    return db.query(q, params).then(result => {
+        return result.rows[0];
+    });
+};
+
+exports.createFriendRequest = function(id_sender, id_recipient) {
+    const q = `INSERT INTO friends (id_sender, id_recipient, request_accepted)
+    VALUES ($1, $2, false)`;
+    const params = [id_sender, id_recipient];
+    return db.query(q, params);
+};
+
+exports.removeFriendRequest = function(id_sender, id_recipient) {
+    const q = `DELETE FROM friends 
+    WHERE (id_sender = $1 AND id_recipient = $2) 
+    OR (id_recipient = $1 AND id_sender = $2)`;
+    const params = [id_sender, id_recipient];
+    return db.query(q, params);
+};
+exports.acceptFriendRequest = function(id_sender, id_recipient) {
+    const q = `UPDATE friends 
+    SET request_accepted = true
+    WHERE (id_sender = $1 AND id_recipient = $2) 
+    OR (id_recipient = $1 AND id_sender = $2)`;
+    const params = [id_sender, id_recipient];
+    return db.query(q, params);
+};

@@ -306,6 +306,39 @@ body {
     font-weight: bold;
 }
 
+/* /////// OTHER PROFILE /////// */
+
+.other-profile {
+    height: 400px;
+    display: flex;
+}
+
+.other-profile-area {
+    height: 430px;
+    width: 375px;
+    margin-top: 40px;
+    margin-bottom: 100px;
+    margin-left: 30px;
+    border: 2px solid #212121;
+    border-radius: 6px;
+    background: #ffffff;
+}
+
+.other-profile-picture-image {
+    height: 60%;
+    max-height: 250px;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid black;
+    border-radius: 6px;
+}
+.other-profile-name {
+    margin-left: 20px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
 /* /////// BIO /////// */
 
 .bio-edit {

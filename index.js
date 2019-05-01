@@ -192,6 +192,44 @@ app.get("/api/user/:id", loggedIn, (req, res) => {
         });
 });
 
+////////////////////FRIENDS ROUTE////////////////////
+
+app.get("/api/friend/:recipient", loggedIn, (req, res) => {
+    db.getFriendRequest(req.session.userId, req.params.recipient).then(
+        friendRequest => res.json(friendRequest)
+    );
+});
+
+////////////////////SEND FRIEND REQUEST ROUTE////////////////////
+
+app.post("/api/friend/:recipient/send", loggedIn, (req, res) => {
+    db.createFriendRequest(req.session.userId, req.params.recipient).then(() =>
+        res.sendStatus(200)
+    );
+});
+
+////////////////////UNFRIEND ROUTE////////////////////
+
+app.post("/api/friend/:recipient/unfriend", loggedIn, (req, res) => {
+    db.removeFriendRequest(req.session.userId, req.params.recipient).then(() =>
+        res.sendStatus(200)
+    );
+});
+////////////////////CANCEL FRIEND REQUEST ROUTE////////////////////
+
+app.post("/api/friend/:recipient/cancel", loggedIn, (req, res) => {
+    db.removeFriendRequest(req.session.userId, req.params.recipient).then(() =>
+        res.sendStatus(200)
+    );
+});
+////////////////////ACCEPT FRIEND REQUEST ROUTE////////////////////
+
+app.post("/api/friend/:recipient/accept", loggedIn, (req, res) => {
+    db.acceptFriendRequest(req.session.userId, req.params.recipient).then(() =>
+        res.sendStatus(200)
+    );
+});
+
 ////////////////////EVERYTHING ROUTE////////////////////
 
 app.get("*", (req, res) => {
