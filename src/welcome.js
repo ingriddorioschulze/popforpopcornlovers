@@ -7,7 +7,6 @@ import Logo from "./logo";
 const Welcome = () => {
     return (
         <div className="welcome-container">
-            <div className="welcome-title">welcome to</div>
             <Logo />
             <div className="welcome-text">for popcorn lovers.</div>
             <HashRouter>
