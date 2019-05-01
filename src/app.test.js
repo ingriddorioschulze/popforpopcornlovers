@@ -5,7 +5,7 @@ import axios from "./axios";
 
 jest.mock("./axios");
 
-test("app sets state", async () => {
+test.skip("app sets state", async () => {
     axios.get.mockResolvedValue({
         data: {
             id: 1,

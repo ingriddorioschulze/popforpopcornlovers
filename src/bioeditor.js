@@ -49,7 +49,11 @@ export default class BioEditor extends React.Component {
             );
         }
         if (!this.props.bio) {
-            return <button onClick={this.switchToEdit}>add bio</button>;
+            return (
+                <button className="bio-add-button" onClick={this.switchToEdit}>
+                    add bio
+                </button>
+            );
         } else {
             return (
                 <div className="bio-edit">
