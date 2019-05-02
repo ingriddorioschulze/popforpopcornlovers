@@ -230,6 +230,12 @@ app.post("/api/friend/:recipient/accept", loggedIn, (req, res) => {
     );
 });
 
+////////////////////FRIENDS ROUTE////////////////////
+
+app.get("/api/friends", loggedIn, (req, res) => {
+    db.getFriends(req.session.userId).then(friends => res.json(friends));
+});
+
 ////////////////////EVERYTHING ROUTE////////////////////
 
 app.get("*", (req, res) => {

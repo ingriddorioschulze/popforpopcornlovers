@@ -94,3 +94,28 @@ exports.acceptFriendRequest = function(id_sender, id_recipient) {
     const params = [id_sender, id_recipient];
     return db.query(q, params);
 };
+
+exports.getFriends2 = function(user_id) {
+    const q = `SELECT id_sender, id_recipient, request_accepted, accepted_on
+    FROM friends
+    WHERE (id_sender = $1 AND request_accepted = true)
+    OR (id_recipient = $1)`;
+    const params = [user_id];
+    return db.query(q, params).then(result => {
+        return result.rows;
+    });
+};
+
+exports.getFriends = function(user_id) {
+    const q = `SELECT
+        id_sender, id_recipient, request_accepted, accepted_on,
+        users.id as id, first_name, last_name, users_image
+    FROM friends
+    JOIN users ON users.id = CASE WHEN id_sender = $1 THEN id_recipient ELSE id_sender END
+    WHERE (id_sender = $1 AND request_accepted = true)
+    OR (id_recipient = $1)`;
+    const params = [user_id];
+    return db.query(q, params).then(result => {
+        return result.rows;
+    });
+};

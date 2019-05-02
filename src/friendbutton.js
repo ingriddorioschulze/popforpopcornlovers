@@ -59,27 +59,41 @@ export default class FriendButton extends React.Component {
             return null;
         } else if (this.state.request_accepted === undefined) {
             return (
-                <button className="send-friend-request" onClick={this.send}>
-                    send friend request
-                </button>
+                <div>
+                    <button className="send-friend-request" onClick={this.send}>
+                        send friend request
+                    </button>
+                </div>
             );
         } else if (this.state.request_accepted === true) {
             return (
-                <button className="unfriend" onClick={this.unfriend}>
-                    unfriend
-                </button>
+                <div>
+                    <button className="unfriend" onClick={this.unfriend}>
+                        unfriend
+                    </button>
+                </div>
             );
         } else if (this.state.id_recipient === this.props.recipient) {
             return (
-                <button className="cancel-friend-request" onClick={this.cancel}>
-                    cancel friend request
-                </button>
+                <div>
+                    <button
+                        className="cancel-friend-request"
+                        onClick={this.cancel}
+                    >
+                        cancel friend request
+                    </button>
+                </div>
             );
         } else {
             return (
-                <button className="accept-friend-request" onClick={this.accept}>
-                    accept friend request
-                </button>
+                <div>
+                    <button
+                        className="accept-friend-request"
+                        onClick={this.accept}
+                    >
+                        accept friend request
+                    </button>
+                </div>
             );
         }
     }

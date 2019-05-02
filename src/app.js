@@ -9,17 +9,27 @@ import OtherProfile from "./otherprofile";
 import SearchBox from "./searchbox";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Friends from "./friends";
 
 export default class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            searchfield: ""
+        };
     }
+
+    onSearchChange(event) {
+        console.log(event.target.value);
+        // const filteredUsers = this.state?
+    }
+
     componentDidMount() {
         axios.get("/users").then(({ data }) => {
             this.setState(data);
         });
     }
+
     render() {
         if (!this.state.id) {
             return null;
@@ -34,7 +44,7 @@ export default class App extends React.Component {
         );
         return (
             <React.Fragment>
-                <SearchBox />
+                <SearchBox searchChange={this.onSearchChange} />
                 <BrowserRouter>
                     <div className="app">
                         <header className="app-header">
@@ -65,6 +75,7 @@ export default class App extends React.Component {
                                     />
                                 )}
                             />
+                            <Route path="/friends" component={Friends} />
                             <Route path="/user/:id" component={OtherProfile} />
                         </div>
 
