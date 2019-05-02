@@ -54,7 +54,10 @@ export default class Login extends React.Component {
                                 placeholder="password"
                                 required
                             />
-                            <button className="login-button" type="submit">
+                            <button
+                                className="login-button login-button-hover"
+                                type="submit"
+                            >
                                 login
                             </button>
                         </form>

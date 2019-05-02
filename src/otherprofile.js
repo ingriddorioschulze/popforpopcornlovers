@@ -42,23 +42,28 @@ export default class OtherProfile extends React.Component {
             return null;
         }
         return (
-            <div className="other-profile">
-                <div className="other-profile-area">
-                    <img
-                        className="other-profile-picture-image"
-                        src={this.state.users_image}
-                    />
-                    <div className="other-profile-name">
-                        <div>
+            <React.Fragment>
+                <div className="other-profile">
+                    <div className="other-profile-area">
+                        <img
+                            className="other-profile-picture-image"
+                            src={this.state.users_image}
+                        />
+                        <div className="other-profile-name">
                             {`${this.state.first_name} ${this.state.last_name}`}
                             <div className="other-profile-bio">
                                 {this.state.bio}
+
+                                <div className="friend-button">
+                                    <FriendButton
+                                        recipient={this.props.match.params.id}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <FriendButton recipient={this.props.match.params.id} />
-            </div>
+            </React.Fragment>
         );
     }
 }

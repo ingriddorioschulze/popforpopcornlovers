@@ -138,6 +138,8 @@ body {
     margin-top: 30px;
     margin-bottom: 30px;
     background: transparent;
+    padding: 0;
+    cursor: pointer;
 }
 
 .register-login-text {
@@ -224,6 +226,8 @@ body {
     margin-top: 30px;
     margin-bottom: 30px;
     background: transparent;
+    padding: 0;
+    cursor: pointer;
 }
 
 .login-email:hover,
@@ -271,31 +275,34 @@ body {
 .profile {
     height: 400px;
     display: flex;
+    justify-content: center;
 }
 
 .profile-area {
-    height: 320px;
-    width: 400px;
-    margin-top: 40px;
-    margin-bottom: 100px;
-    margin-left: 30px;
+    display: flex;
+    height: 360px;
+    max-height: 400px;
+    width: 80%;
+    padding: 30px;
+    margin: 30px;
     border: 2px solid #212121;
     border-radius: 6px;
     background: #ffffff;
 }
 
 .profile .profile-picture-image {
-    height: 30%;
-    margin-left: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    height: 80%;
+    max-height: 250px;
+    max-width: 250px;
     border: 2px solid black;
     border-radius: 6px;
+    object-fit: cover;
 }
 .profile-name {
-    margin-left: 20px;
+    padding: 20px;
     font-size: 30px;
     font-weight: bold;
+    overflow: scroll;
 }
 
 /* /////// OTHER PROFILE /////// */
@@ -303,39 +310,45 @@ body {
 .other-profile {
     height: 400px;
     display: flex;
+    justify-content: center;
 }
 
 .other-profile-area {
-    height: 430px;
-    width: 375px;
-    margin-top: 40px;
-    margin-bottom: 100px;
-    margin-left: 30px;
+    display: flex;
+    height: 360px;
+    max-height: 400px;
+    width: 80%;
+    padding: 30px;
+    margin: 30px;
     border: 2px solid #212121;
     border-radius: 6px;
     background: #ffffff;
 }
 
 .other-profile-picture-image {
-    height: 60%;
+    height: 80%;
     max-height: 250px;
-    margin-left: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    max-width: 250px;
     border: 2px solid black;
     border-radius: 6px;
+    object-fit: cover;
 }
 .other-profile-name {
-    margin-left: 20px;
+    padding: 30px;
     font-size: 30px;
     font-weight: bold;
+    overflow: scroll;
+}
+
+.other-profile-bio {
+    margin-top: 20px;
+    font-size: 20px;
 }
 
 /* /////// BIO /////// */
 
 .bio-edit {
-    margin-left: 20px;
-    margin-top: 20px;
+    padding: 0 20px 20px 20px;
     font-size: 15px;
 }
 
@@ -345,15 +358,17 @@ body {
     background: none;
     font-family: Sacramento;
     margin-top: 20px;
+    padding: 0;
+    cursor: pointer;
 }
 
 .bio-save-textarea {
     margin-left: 20px;
-    margin-top: 20px;
     border: none;
     background: none;
     font-size: 15px;
     resize: none;
+    padding: 0;
 }
 
 .bio-save-button {
@@ -362,6 +377,8 @@ body {
     background: none;
     font-family: Sacramento;
     margin-left: 20px;
+    padding: 0;
+    cursor: pointer;
 }
 
 /* /////// UPLOAD IMAGE MODAL /////// */
@@ -375,7 +392,7 @@ body {
     justify-content: center;
     align-items: center;
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .upload-image-container {
@@ -400,11 +417,11 @@ body {
 }
 
 .upload-image-modal-close {
-    /* position: absolute; */
     right: 35px;
     top: 5px;
     cursor: pointer;
-    font-size: 60px;
+    font-size: 40px;
+    margin-top: 10px;
 }
 
 .upload-image-input {
@@ -428,10 +445,30 @@ body {
     white-space: nowrap;
 }
 
+/* /////// POPCORN MACHINE /////// */
+
 .popcorn-machine-origin {
     position: relative;
 }
 
 .kernel {
     position: absolute;
+}
+
+/* /////// FRIENDSHIP BUTTON /////// */
+
+.friend-button {
+    padding: 30px 30px 30px 0;
+}
+
+.send-friend-request,
+.unfriend,
+.cancel-friend-request,
+.accept-friend-request {
+    font-size: 25px;
+    background-color: #fa7864;
+    font-family: Sacramento;
+    border-radius: 6px;
+    border: 2px solid black;
+    cursor: pointer;
 }
