@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
     friends: [],
-    friendRequests: []
+    friendRequests: [],
+    searchResults: []
 };
 export function reducer(state = INITIAL_STATE, action) {
     if (action.type === "FRIENDS_LOADED") {
@@ -27,6 +28,11 @@ export function reducer(state = INITIAL_STATE, action) {
         return {
             ...state,
             friends: state.friends.filter(friend => friend.id !== action.friend)
+        };
+    } else if (action.type === "SEARCH_DATA") {
+        return {
+            ...state,
+            searchResults: action.data
         };
     } else {
         return state;

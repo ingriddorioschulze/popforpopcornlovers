@@ -290,7 +290,7 @@ body {
     margin-left: 10px;
 }
 
-/* .search-results {
+.search-results {
     width: 100%;
 }
 .results-list {
@@ -306,7 +306,7 @@ body {
 
 .results-list-no-result {
     color: grey;
-} */
+}
 
 .header-home-button {
     width: 80px;
