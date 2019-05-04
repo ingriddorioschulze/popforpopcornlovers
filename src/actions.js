@@ -8,3 +8,21 @@ export function loadFriends() {
         };
     });
 }
+
+export function acceptRequest(id) {
+    return axios.post(`/api/friend/${id}/accept`).then(() => {
+        return {
+            type: "REQUEST_ACCEPTED",
+            friend: id
+        };
+    });
+}
+
+export function unfriend(id) {
+    return axios.post(`/api/friend/${id}/unfriend`).then(() => {
+        return {
+            type: "UNFRIEND",
+            friend: id
+        };
+    });
+}

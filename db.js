@@ -88,22 +88,11 @@ exports.removeFriendRequest = function(id_sender, id_recipient) {
 };
 exports.acceptFriendRequest = function(id_sender, id_recipient) {
     const q = `UPDATE friends 
-    SET request_accepted = true
+    SET request_accepted = true, accepted_on = now()
     WHERE (id_sender = $1 AND id_recipient = $2) 
     OR (id_recipient = $1 AND id_sender = $2)`;
     const params = [id_sender, id_recipient];
     return db.query(q, params);
-};
-
-exports.getFriends2 = function(user_id) {
-    const q = `SELECT id_sender, id_recipient, request_accepted, accepted_on
-    FROM friends
-    WHERE (id_sender = $1 AND request_accepted = true)
-    OR (id_recipient = $1)`;
-    const params = [user_id];
-    return db.query(q, params).then(result => {
-        return result.rows;
-    });
 };
 
 exports.getFriends = function(user_id) {
