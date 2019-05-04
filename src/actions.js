@@ -26,3 +26,14 @@ export function unfriend(id) {
         };
     });
 }
+
+export function search(text) {
+    return axios
+        .get(`/api/search`, { params: { text: text } })
+        .then(response => {
+            return {
+                type: "SEARCH_DATA",
+                data: response.data
+            };
+        });
+}

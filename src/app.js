@@ -19,9 +19,10 @@ export default class App extends React.Component {
         };
     }
 
-    onSearchChange(event) {
-        console.log(event.target.value);
-        // const filteredUsers = this.state?
+    logout() {
+        axios.post("/logout").then(() => {
+            window.location = "/welcome";
+        });
     }
 
     componentDidMount() {
@@ -44,13 +45,32 @@ export default class App extends React.Component {
         );
         return (
             <React.Fragment>
-                <SearchBox searchChange={this.onSearchChange} />
                 <BrowserRouter>
                     <div className="app">
                         <header className="app-header">
-                            <Link to="/">
-                                <Logo />
+                            <Logo />
+                            <SearchBox className="header-searchbox" />
+                            <Link className="header-home-button" to="/">
+                                home
                             </Link>
+                            <Link
+                                className="header-friends-button"
+                                to="/friends"
+                            >
+                                friends
+                            </Link>
+
+                            <Link className="header-chat-button" to="/chat">
+                                chat
+                            </Link>
+
+                            <a
+                                onClick={this.logout}
+                                className="header-logout-button"
+                            >
+                                logout
+                            </a>
+
                             {profilePic}
                         </header>
                         <div>

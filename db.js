@@ -108,3 +108,19 @@ exports.getFriends = function(user_id) {
         return result.rows;
     });
 };
+
+exports.search = function(text) {
+    console.log(text);
+    const tsquery = text.split(" ").reduce((acc, next) => {
+        console.log(acc);
+        return acc === "" ? `${next}:*` : `${acc} & ${next}:*`;
+    }, "");
+    console.log(tsquery);
+    const q = `SELECT id, first_name, last_name, users_image
+    FROM users
+    WHERE to_tsvector(first_name || ' ' || last_name) @@ to_tsquery($1)`;
+    const params = [tsquery];
+    return db.query(q, params).then(result => {
+        return result.rows;
+    });
+};

@@ -236,6 +236,12 @@ app.get("/api/friends", loggedIn, (req, res) => {
     db.getFriends(req.session.userId).then(friends => res.json(friends));
 });
 
+////////////////////SEARCH ROUTE////////////////////
+
+app.get("/api/search", loggedIn, (req, res) => {
+    db.search(req.query.text).then(results => res.json(results));
+});
+
 ////////////////////EVERYTHING ROUTE////////////////////
 
 app.get("*", (req, res) => {

@@ -3,37 +3,38 @@ import { connect } from "react-redux";
 import { loadFriends, acceptRequest, unfriend } from "./actions";
 
 const FriendRequest = ({ friendRequest, accept }) => (
-    <React.Fragment>
-        <div className="friend-requests-image">
-            <img src={friendRequest.users_image} />
-        </div>
+    <div>
+        <img
+            className="friend-requests-image"
+            src={friendRequest.users_image}
+        />
         <div className="friend-requests-name">
             {`${friendRequest.first_name} ${friendRequest.last_name}`}
+            <br />
+            <button
+                onClick={() => accept(friendRequest.id)}
+                className="friend-requests-accept-button"
+            >
+                accept friend request
+            </button>
         </div>
-        <button
-            onClick={() => accept(friendRequest.id)}
-            className="friend-requests-accept-button"
-        >
-            accept friend request
-        </button>
-    </React.Fragment>
+    </div>
 );
 
 const Friend = ({ friend, unfriend }) => (
-    <React.Fragment>
-        <div className="friend-image">
-            <img src={friend.users_image} />
-        </div>
+    <div>
+        <img className="friend-image" src={friend.users_image} />
         <div className="friend-name">
             {`${friend.first_name} ${friend.last_name}`}
+            <br />
+            <button
+                onClick={() => unfriend(friend.id)}
+                className="friend-unfriend-button"
+            >
+                unfriend
+            </button>
         </div>
-        <button
-            onClick={() => unfriend(friend.id)}
-            className="friend-unfriend-button"
-        >
-            unfriend
-        </button>
-    </React.Fragment>
+    </div>
 );
 
 const mapStateToProps = state => {
@@ -63,10 +64,9 @@ class Friends extends React.Component {
     }
     render() {
         return (
-            <div className="friends-area">
+            <div className="friends-container">
+                <div className="friend-requests-text">friend requests</div>
                 <div className="friend-requests">
-                    <div className="friend-requests-text">friend requests</div>
-
                     {this.props.friendRequests.map(friendRequest => (
                         <FriendRequest
                             key={friendRequest.id}
@@ -75,8 +75,8 @@ class Friends extends React.Component {
                         />
                     ))}
                 </div>
-                <div className="friends">
-                    <div className="friends-text">friends</div>
+                <div className="friends-text">friends</div>
+                <div className="friends-friends">
                     {this.props.friends.map(friend => (
                         <Friend
                             key={friend.id}
