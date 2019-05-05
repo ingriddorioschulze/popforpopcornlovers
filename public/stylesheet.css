@@ -280,6 +280,8 @@ body {
 
 .search-box {
     display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .search-box-input {
@@ -287,16 +289,17 @@ body {
     height: 35px;
     border: 2px solid black;
     border-radius: 6px;
-    margin-left: 10px;
 }
 
 .search-results {
+    position: absolute;
     width: 100%;
-}
-.results-list {
-    width: 100%;
+    top: 35px;
     border: 2px solid black;
+    border-radius: 6px;
+    background: #ffffff;
 }
+
 .results-list-item {
     height: 30px;
     font-family: sans-serif;
@@ -616,8 +619,6 @@ body {
     display: flex;
     align-content: center;
     justify-content: center;
-    height: 360px;
-    max-height: 400px;
     width: 80%;
     padding: 30px;
     margin: 30px;
@@ -625,6 +626,7 @@ body {
     border-radius: 6px;
     background: #ffffff;
     overflow: scroll;
+    flex-wrap: wrap;
 }
 
 .friends-text {

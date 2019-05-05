@@ -37,3 +37,9 @@ export function search(text) {
             };
         });
 }
+
+export function closeSearchResults() {
+    return {
+        type: "CLOSE_SEARCH_RESULTS"
+    };
+}

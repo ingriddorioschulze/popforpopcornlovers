@@ -112,7 +112,8 @@ exports.getFriends = function(user_id) {
 exports.search = function(text) {
     const q = `SELECT id, first_name, last_name, users_image
     FROM users
-    WHERE lower(first_name || ' ' || last_name) LIKE $1`;
+    WHERE lower(first_name || ' ' || last_name) LIKE $1 
+    LIMIT 6`;
     const params = [`%${text.toLowerCase()}%`];
     return db.query(q, params).then(result => {
         return result.rows;

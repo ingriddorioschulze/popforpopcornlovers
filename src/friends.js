@@ -63,18 +63,26 @@ class Friends extends React.Component {
         this.props.loadFriends();
     }
     render() {
+        let friendRequests;
+        if (this.props.friendRequests.length > 0) {
+            friendRequests = (
+                <React.Fragment>
+                    <div className="friend-requests-text">friend requests</div>
+                    <div className="friend-requests">
+                        {this.props.friendRequests.map(friendRequest => (
+                            <FriendRequest
+                                key={friendRequest.id}
+                                friendRequest={friendRequest}
+                                accept={this.props.acceptRequest}
+                            />
+                        ))}
+                    </div>
+                </React.Fragment>
+            );
+        }
         return (
             <div className="friends-container">
-                <div className="friend-requests-text">friend requests</div>
-                <div className="friend-requests">
-                    {this.props.friendRequests.map(friendRequest => (
-                        <FriendRequest
-                            key={friendRequest.id}
-                            friendRequest={friendRequest}
-                            accept={this.props.acceptRequest}
-                        />
-                    ))}
-                </div>
+                {friendRequests}
                 <div className="friends-text">friends</div>
                 <div className="friends-friends">
                     {this.props.friends.map(friend => (

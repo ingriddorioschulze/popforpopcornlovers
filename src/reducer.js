@@ -1,7 +1,8 @@
 const INITIAL_STATE = {
     friends: [],
     friendRequests: [],
-    searchResults: []
+    searchResults: [],
+    resultsVisible: false
 };
 export function reducer(state = INITIAL_STATE, action) {
     if (action.type === "FRIENDS_LOADED") {
@@ -32,7 +33,13 @@ export function reducer(state = INITIAL_STATE, action) {
     } else if (action.type === "SEARCH_DATA") {
         return {
             ...state,
-            searchResults: action.data
+            searchResults: action.data,
+            resultsVisible: true
+        };
+    } else if (action.type === "CLOSE_SEARCH_RESULTS") {
+        return {
+            ...state,
+            resultsVisible: false
         };
     } else {
         return state;
