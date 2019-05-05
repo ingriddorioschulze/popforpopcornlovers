@@ -14,9 +14,7 @@ import Friends from "./friends";
 export default class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            searchfield: ""
-        };
+        this.state = {};
     }
 
     logout() {

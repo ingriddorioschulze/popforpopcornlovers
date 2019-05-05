@@ -6,11 +6,17 @@ import { Link } from "react-router-dom";
 class SearchBox extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            searchText: ""
+        };
         this.eventListener = this.eventListener.bind(this);
     }
 
     eventListener() {
         this.props.closeSearchResults();
+        this.setState({
+            searchText: ""
+        });
     }
 
     componentDidMount() {
@@ -22,7 +28,11 @@ class SearchBox extends React.Component {
     }
 
     render() {
+        let noResults;
         const { results, search, resultsVisible } = this.props;
+        if (results.length === 0) {
+            noResults = <div className="search-no-results">No results</div>;
+        }
         return (
             <div className="search-box-area">
                 <div className="search-box">
@@ -30,17 +40,31 @@ class SearchBox extends React.Component {
                         className="search-box-input"
                         type="text"
                         placeholder="search"
-                        onChange={e => search(e.target.value)}
+                        onChange={e => {
+                            this.setState({
+                                searchText: e.target.value
+                            });
+                            search(e.target.value);
+                        }}
+                        value={this.state.searchText}
                     />
                     {resultsVisible && (
                         <div className="search-results">
+                            {noResults}
                             {results.map(result => (
                                 <div
                                     className="results-list-item"
                                     key={result.id}
                                 >
                                     <Link to={`/user/${result.id}`}>
-                                        {result.first_name}
+                                        <img
+                                            className="search-image"
+                                            src={result.users_image}
+                                        />
+                                        <span className="search-result-name">
+                                            {result.first_name}&nbsp;
+                                            {result.last_name}
+                                        </span>
                                     </Link>
                                 </div>
                             ))}
