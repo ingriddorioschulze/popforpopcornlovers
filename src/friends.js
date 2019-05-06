@@ -64,6 +64,7 @@ class Friends extends React.Component {
     }
     render() {
         let friendRequests;
+        let friends;
 
         if (this.props.friendRequests.length > 0) {
             friendRequests = (
@@ -81,21 +82,37 @@ class Friends extends React.Component {
                 </React.Fragment>
             );
         }
-        return (
-            <div className="friends-container">
-                {friendRequests}
-                <div className="friends-text">friends</div>
-                <div className="friends-friends">
-                    {this.props.friends.map(friend => (
-                        <Friend
-                            key={friend.id}
-                            friend={friend}
-                            unfriend={this.props.unfriend}
-                        />
-                    ))}
+        if (this.props.friends.length > 0) {
+            friends = (
+                <React.Fragment>
+                    <div className="friends-text">friends</div>
+                    <div className="friends-friends">
+                        {this.props.friends.map(friend => (
+                            <Friend
+                                key={friend.id}
+                                friend={friend}
+                                unfriend={this.props.unfriend}
+                            />
+                        ))}
+                    </div>
+                </React.Fragment>
+            );
+        }
+
+        if (friends || friendRequests) {
+            return (
+                <div className="friends-container">
+                    {friendRequests}
+                    {friends}
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return (
+                <div className="empty-friends">
+                    no friends or friend requests yet
+                </div>
+            );
+        }
     }
 }
 
