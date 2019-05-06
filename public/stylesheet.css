@@ -154,6 +154,7 @@ body {
     border: 3px solid;
     border-color: #212121;
     font-weight: bold;
+    background: #fa7864;
 }
 
 .form-error-message {
@@ -237,6 +238,7 @@ body {
     border: 3px solid;
     border-color: #212121;
     font-weight: bold;
+    background: #fa7864;
 }
 
 .login-error-message {
@@ -253,25 +255,27 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 .app-header {
     display: flex;
     flex-direction: row;
-    height: 200px;
+    height: 100px;
     justify-content: center;
     align-items: center;
     width: 100vw;
     padding: 30px;
+    background: #212121;
 }
 
 .app-header .logo {
-    height: 80%;
+    height: 90px;
     margin-right: auto;
 }
 
 .app-header .profile-picture-image {
     width: 100%;
-    max-width: 90px;
-    border: 2px solid black;
+    max-width: 60px;
+    border: 2px solid #ffffff;
     border-radius: 6px;
     object-fit: cover;
     object-position: center;
@@ -285,10 +289,17 @@ body {
 }
 
 .search-box-input {
-    width: 230px;
     height: 35px;
-    border: 2px solid black;
-    border-radius: 6px;
+    width: 250px;
+    background: none;
+    border: none;
+    font-size: 18px;
+}
+
+.search-box-input::placeholder {
+    font-size: 18px;
+    text-align: center;
+    color: #ffffff;
 }
 
 .search-results {
@@ -310,7 +321,6 @@ body {
 
 .search-image {
     width: 30px;
-    /* height: 100%; */
     height: 30px;
     border: 1px solid black;
     border-radius: 6px;
@@ -340,46 +350,24 @@ body {
     color: grey;
 }
 
-.header-home-button {
-    width: 80px;
-    height: 35px;
-    margin: 10px;
-    border: 2px solid black;
-    border-radius: 6px;
-    background-color: #ffffff;
-    text-align: center;
-    text-decoration: none;
-}
-
-.header-friends-button {
-    width: 80px;
-    height: 35px;
-    border: 2px solid black;
-    border-radius: 6px;
-    background-color: #ffffff;
-    text-align: center;
-    text-decoration: none;
-}
-.header-chat-button {
-    width: 80px;
-    height: 35px;
-    margin: 10px;
-    border: 2px solid black;
-    border-radius: 6px;
-    background-color: #ffffff;
-    text-align: center;
-    text-decoration: none;
-}
-
+.header-home-button,
+.header-friends-button,
+.header-chat-button,
 .header-logout-button {
-    width: 80px;
-    height: 35px;
-    margin-right: 10px;
-    border: 2px solid black;
-    border-radius: 6px;
-    background-color: #ffffff;
+    float: left;
+    padding: 12px;
     text-align: center;
     text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    color: #ffffff;
+}
+.search-box-input:hover,
+.header-home-button:hover,
+.header-friends-button:hover,
+.header-chat-button:hover,
+.header-logout-button:hover {
+    font-weight: 600;
 }
 
 /* /////// PROFILE /////// */
@@ -479,10 +467,9 @@ body {
 
 .bio-save-textarea {
     margin-left: 20px;
-    border: none;
+    margin-bottom: 20px;
     background: none;
     font-size: 15px;
-    resize: none;
     padding: 0;
 }
 
@@ -615,7 +602,13 @@ body {
 .friend-requests-text {
     font-size: 30px;
     margin-top: 30px;
+    margin-bottom: 30px;
     font-family: Sacramento;
+    width: 20%;
+    text-align: center;
+    border: 2px solid #212121;
+    border-radius: 6px;
+    background: #ffffff;
 }
 
 .friend-requests-image {
@@ -630,13 +623,15 @@ body {
 
 .friend-requests-name {
     font-size: 15px;
-    padding-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     margin-left: 20px;
     margin-right: 20px;
 }
 
 .friend-requests-accept-button {
     font-size: 10px;
+    font-weight: bold;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -661,13 +656,19 @@ body {
 .friends-text {
     font-size: 30px;
     margin-top: 30px;
+    margin-bottom: 30px;
     font-family: Sacramento;
+    background: #ffffff;
+    width: 10%;
+    text-align: center;
+    border: 2px solid #212121;
+    border-radius: 6px;
 }
 
 .friend-image {
     width: 150px;
     height: 150px;
-    border: 2px solid black;
+    border: 2px solid #212121;
     border-radius: 6px;
     object-fit: cover;
     object-position: center;
@@ -676,16 +677,33 @@ body {
 
 .friend-name {
     font-size: 15px;
-    padding-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     margin-left: 20px;
     margin-right: 20px;
 }
 
 .friend-unfriend-button {
     font-size: 10px;
+    font-weight: bold;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     background: none;
     padding: 0;
+}
+
+.copyright {
+    position: fixed;
+    display: flex;
+    background-color: #212121;
+    left: 0;
+    bottom: 0;
+    height: 35px;
+    width: 100%;
+    font-size: 15px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
 }

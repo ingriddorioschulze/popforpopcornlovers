@@ -57,11 +57,9 @@ export default class App extends React.Component {
                             >
                                 friends
                             </Link>
-
                             <Link className="header-chat-button" to="/chat">
                                 chat
                             </Link>
-
                             <a
                                 onClick={this.logout}
                                 className="header-logout-button"
@@ -112,6 +110,10 @@ export default class App extends React.Component {
                                 }
                             />
                         )}
+                        <footer className="copyright">
+                            © 2019 pop | for popcorn lovers by Ingrid do Rio
+                            Schulze
+                        </footer>
                     </div>
                 </BrowserRouter>
             </React.Fragment>

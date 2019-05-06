@@ -64,6 +64,7 @@ class Friends extends React.Component {
     }
     render() {
         let friendRequests;
+
         if (this.props.friendRequests.length > 0) {
             friendRequests = (
                 <React.Fragment>
