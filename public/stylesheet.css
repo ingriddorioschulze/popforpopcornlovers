@@ -275,6 +275,7 @@ body {
 .app-header .profile-picture-image {
     width: 100%;
     max-width: 60px;
+    height: 60px;
     border: 2px solid #ffffff;
     border-radius: 6px;
     object-fit: cover;
@@ -692,6 +693,12 @@ body {
     background: none;
     padding: 0;
 }
+
+/* .friends-page {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+} */
 
 .empty-friends {
     font-size: 30px;

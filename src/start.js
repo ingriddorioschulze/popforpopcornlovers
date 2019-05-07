@@ -6,6 +6,7 @@ import { createStore, applyMiddleware } from "redux";
 import reduxPromise from "redux-promise";
 import { reducer } from "./reducer";
 import { Provider } from "react-redux";
+import "./socketClient";
 
 const store = createStore(reducer, applyMiddleware(reduxPromise));
 

@@ -8,6 +8,7 @@ const path = require("path");
 const password = require("./password");
 const cookieSession = require("cookie-session");
 const csurf = require("csurf");
+const socket = require("./socket");
 
 const diskStorage = multer.diskStorage({
     destination: function(req, file, callback) {
@@ -27,14 +28,16 @@ const uploader = multer({
     }
 });
 
-const app = express();
+const cookieSessionMiddleware = cookieSession({
+    maxAge: 1000 * 60 * 60 * 24 * 24,
+    secret: `Isay:Hey!Whatisgoingon?`
+});
 
-app.use(
-    cookieSession({
-        maxAge: 1000 * 60 * 60 * 24 * 24,
-        secret: `Isay:Hey!Whatisgoingon?`
-    })
-);
+const app = express();
+const server = require("http").Server(app);
+socket.init(server, cookieSessionMiddleware);
+
+app.use(cookieSessionMiddleware);
 
 app.use(compression());
 
@@ -252,6 +255,6 @@ app.get("*", (req, res) => {
     }
 });
 
-app.listen(8080, function() {
+server.listen(8080, function() {
     console.log("Oi, pop!");
 });
