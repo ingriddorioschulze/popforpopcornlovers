@@ -119,3 +119,10 @@ exports.search = function(text) {
         return result.rows;
     });
 };
+
+exports.getUsersByIds = function(arrayOfIds) {
+    const query = `SELECT id, first_name, last_name, users_image 
+    FROM users 
+    WHERE id = ANY($1)`;
+    return db.query(query, [arrayOfIds]);
+};

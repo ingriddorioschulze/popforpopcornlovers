@@ -62,7 +62,6 @@ app.use(function(req, res, next) {
 });
 
 app.use(express.static("./public"));
-//app.use(require("body-parser").json());
 app.use(express.json());
 
 ////////////////////WELCOME ROUTE////////////////////
@@ -245,6 +244,8 @@ app.get("/api/search", loggedIn, (req, res) => {
     db.search(req.query.text).then(results => res.json(results));
 });
 
+////////////////////ONLINE USERS ROUTE////////////////////
+
 ////////////////////EVERYTHING ROUTE////////////////////
 
 app.get("*", (req, res) => {
@@ -255,6 +256,6 @@ app.get("*", (req, res) => {
     }
 });
 
-server.listen(8080, function() {
+server.listen(8080, () => {
     console.log("Oi, pop!");
 });

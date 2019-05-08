@@ -2,7 +2,8 @@ const INITIAL_STATE = {
     friends: [],
     friendRequests: [],
     searchResults: [],
-    resultsVisible: false
+    resultsVisible: false,
+    onlineUsers: []
 };
 export function reducer(state = INITIAL_STATE, action) {
     if (action.type === "FRIENDS_LOADED") {
@@ -40,6 +41,23 @@ export function reducer(state = INITIAL_STATE, action) {
         return {
             ...state,
             resultsVisible: false
+        };
+    } else if (action.type === "ONLINE_USERS") {
+        return {
+            ...state,
+            onlineUsers: action.onlineUsers
+        };
+    } else if (action.type === "USER_JOINED") {
+        return {
+            ...state,
+            onlineUsers: state.onlineUsers.concat(action.userJoined)
+        };
+    } else if (action.type === "USER_LEFT") {
+        return {
+            ...state,
+            onlineUsers: state.onlineUsers.filter(
+                onlineUser => onlineUser.id !== action.userLeft
+            )
         };
     } else {
         return state;

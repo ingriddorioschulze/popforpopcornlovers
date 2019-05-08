@@ -1,10 +1,30 @@
 import * as io from "socket.io-client";
+import { onlineUsers, userJoined, userLeft } from "./actions";
 
-const socket = io.connect();
+export let socket;
 
-socket.on("welcome", function(data) {
-    console.log(data);
-    socket.emit("thanks", {
-        message: "Thank you. It is great to be here."
-    });
-});
+export function init(store) {
+    if (!socket) {
+        socket = io.connect();
+
+        // socket.on("chatMessageRedux", data => {
+        //     store.dispatch(addNewChatToRedux(data))
+        // });
+
+        // socket.on("chatMessages", data => {
+        //     store.dispatch(getMostRecentChats(data));
+        // });
+
+        socket.on("onlineUsers", users => {
+            store.dispatch(onlineUsers(users));
+        });
+
+        socket.on("userJoined", user => {
+            store.dispatch(userJoined(user));
+        });
+
+        socket.on("userLeft", userId => {
+            store.dispatch(userLeft(userId));
+        });
+    }
+}

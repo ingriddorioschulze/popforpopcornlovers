@@ -43,3 +43,24 @@ export function closeSearchResults() {
         type: "CLOSE_SEARCH_RESULTS"
     };
 }
+
+export function onlineUsers(users) {
+    return {
+        type: "ONLINE_USERS",
+        onlineUsers: users
+    };
+}
+
+export function userJoined(user) {
+    return {
+        type: "USER_JOINED",
+        userJoined: user
+    };
+}
+
+export function userLeft(userId) {
+    return {
+        type: "USER_LEFT",
+        userLeft: userId
+    };
+}

@@ -10,6 +10,8 @@ import SearchBox from "./searchbox";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Friends from "./friends";
+import Chat from "./chat";
+import Online from "./online";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -93,6 +95,8 @@ export default class App extends React.Component {
                             />
                             <Route path="/friends" component={Friends} />
                             <Route path="/user/:id" component={OtherProfile} />
+                            <Route path="/chat" component={Chat} />
+                            <Route path="/online" component={Online} />
                         </div>
 
                         {this.state.isUploaderVisible && (
