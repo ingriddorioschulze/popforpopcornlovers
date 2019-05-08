@@ -71,7 +71,7 @@ export default class App extends React.Component {
 
                             {profilePic}
                         </header>
-                        <div>
+                        <main>
                             <Route
                                 exact
                                 path="/"
@@ -97,7 +97,7 @@ export default class App extends React.Component {
                             <Route path="/user/:id" component={OtherProfile} />
                             <Route path="/chat" component={Chat} />
                             <Route path="/online" component={Online} />
-                        </div>
+                        </main>
 
                         {this.state.isUploaderVisible && (
                             <Uploader

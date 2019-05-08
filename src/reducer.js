@@ -3,7 +3,8 @@ const INITIAL_STATE = {
     friendRequests: [],
     searchResults: [],
     resultsVisible: false,
-    onlineUsers: []
+    onlineUsers: [],
+    chatMessages: []
 };
 export function reducer(state = INITIAL_STATE, action) {
     if (action.type === "FRIENDS_LOADED") {
@@ -58,6 +59,16 @@ export function reducer(state = INITIAL_STATE, action) {
             onlineUsers: state.onlineUsers.filter(
                 onlineUser => onlineUser.id !== action.userLeft
             )
+        };
+    } else if (action.type === "CHAT_MESSAGES") {
+        return {
+            ...state,
+            chatMessages: action.messages
+        };
+    } else if (action.type === "NEW_CHAT_MESSAGE") {
+        return {
+            ...state,
+            chatMessages: state.chatMessages.concat(action.newMessage)
         };
     } else {
         return state;

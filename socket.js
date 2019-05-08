@@ -8,7 +8,9 @@ exports.init = (server, cookieSessionMiddleware) => {
         cookieSessionMiddleware(socket.request, socket.request.res, next);
     });
 
-    let onlineUsers = {};
+    const onlineUsers = {};
+    const chatMessages = [];
+
     io.on("connection", socket => {
         if (!socket.request.session || !socket.request.session.userId) {
             return socket.disconnect(true);
@@ -16,6 +18,8 @@ exports.init = (server, cookieSessionMiddleware) => {
         console.log(`socket with the id ${socket.id} is now connected`);
 
         const userId = socket.request.session.userId;
+
+        socket.emit("chatMessages", chatMessages);
 
         db.getUsersByIds(Object.values(onlineUsers)).then(({ rows }) => {
             socket.emit("onlineUsers", rows);
@@ -32,26 +36,25 @@ exports.init = (server, cookieSessionMiddleware) => {
             delete onlineUsers[socket.id];
             socket.broadcast.emit("userLeft", userId);
         });
+
+        socket.on("newChatMessage", message => {
+            db.getUserData(socket.request.session.userId).then(user => {
+                let newChatObj = {
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    users_image: user.users_image,
+                    chat: message,
+                    id: socket.request.session.userId,
+                    timestamp: new Date()
+                };
+                chatMessages.push(newChatObj);
+                if (chatMessages.length > 10) {
+                    chatMessages.shift();
+                }
+
+                socket.broadcast.emit("newChatMessage", newChatObj);
+                socket.emit("newChatMessage", newChatObj);
+            });
+        });
     });
-
-    // socket.on("newChatMessage", data => {
-    //if using db method -- INSERT chat and userId
-    //if using array method -- you need to push chat into the chats array
-    //regard the methods you use you'll have to query to db to get info
-    // about the user who posted the message (first name, last name, picture)
-    // get users first name , last name, picture and chat message in to Redux
-    //create an object that will store the users info and this object needs
-    //to look like  the other objects in the chats array.
-
-    // let newChatObject = {
-    //     firstname: results.rows[0].first_name,
-    //     lastname: results.rows[0].last_name,
-    //     image: results.rows[0].userImage,
-    //     chat: data,
-    //     id: socket.request.session.userId,
-    //     timestamp: results.rows[0].timestamp
-    // }
-
-    //     socket.broadcast("chatMessageRedux", newChatObject);
-    // });
 };

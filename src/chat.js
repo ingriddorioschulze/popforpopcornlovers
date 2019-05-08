@@ -1,6 +1,35 @@
 import React from "react";
 import { connect } from "react-redux";
 import { socket } from "./socketClient";
+import * as moment from "moment";
+
+class ChatTime extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            time: new Date()
+        };
+        // this.handleInput = this.handleInput.bind(this);
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(() => {
+            this.setState({ time: new Date() });
+        }, 5000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
+    render() {
+        return (
+            <span className="chat-timestamp">
+                {moment(this.props.time).fromNow()}
+            </span>
+        );
+    }
+}
 
 class Chat extends React.Component {
     constructor(props) {
@@ -10,16 +39,18 @@ class Chat extends React.Component {
 
     handleInput(e) {
         if (e.which === 13) {
+            e.preventDefault();
             const newChat = e.target.value;
+            if (!newChat) {
+                return;
+            }
             socket.emit("newChatMessage", newChat);
-            console.log("this.myDiv: ", this.myDiv);
+            e.target.value = "";
         }
     }
 
-    //find out when there is a new chat message.
-
     componentDidUpdate() {
-        this.myDiv.scrollTop = "100px";
+        this.myDiv.scrollTop = this.props.chatMessages.length * 136;
     }
 
     render() {
@@ -30,16 +61,20 @@ class Chat extends React.Component {
                     className="chat-container"
                     ref={chatsContainer => (this.myDiv = chatsContainer)}
                 >
-                    {/* <span>chat messages</span>
-                    <span>chat messages</span>
-                    <span>chat messages</span>
-                    <span>chat messages</span>
-                    <span>chat messages</span>
-                    <span>chat messages</span>
-                    <span>chat messages</span>
-                    <span>chat messages</span>
-                    <span>chat messages</span>
-                    <span>chat messages</span> */}
+                    {this.props.chatMessages.map((message, i) => (
+                        <div key={i}>
+                            <div>
+                                {message.first_name} {message.last_name}
+                            </div>
+                            <img
+                                className="chat-image"
+                                src={message.users_image}
+                            />
+                            <span className="chat-message">{message.chat}</span>
+                            <br />
+                            <ChatTime time={message.timestamp} />
+                        </div>
+                    ))}
                 </div>
                 <textarea onKeyDown={this.handleInput} />
             </div>
@@ -48,7 +83,9 @@ class Chat extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return {};
+    return {
+        chatMessages: state.chatMessages
+    };
 };
 
 export default connect(mapStateToProps)(Chat);

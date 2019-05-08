@@ -64,3 +64,17 @@ export function userLeft(userId) {
         userLeft: userId
     };
 }
+
+export function chatMessages(messages) {
+    return {
+        type: "CHAT_MESSAGES",
+        messages: messages
+    };
+}
+
+export function newChatMessage(newMessage) {
+    return {
+        type: "NEW_CHAT_MESSAGE",
+        newMessage: newMessage
+    };
+}
