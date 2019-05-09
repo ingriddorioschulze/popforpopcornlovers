@@ -702,6 +702,12 @@ body {
     padding: 0;
 }
 
+.empty-friends-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
 .empty-friends {
     font-size: 30px;
     margin-top: 30px;
@@ -768,6 +774,24 @@ body {
     object-fit: cover;
     object-position: center;
     margin: 20px;
+}
+
+.empty-online-users-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.empty-online-users {
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-family: Sacramento;
+    background: #ffffff;
+    width: 30%;
+    text-align: center;
+    border: 2px solid #212121;
+    border-radius: 6px;
 }
 
 /* /////// CHAT /////// */
@@ -847,6 +871,18 @@ body {
     width: 60%;
     font-size: 15px;
     padding: 0;
+    border: 2px solid #212121;
+    border-radius: 6px;
+}
+
+.empty-chat {
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-family: Sacramento;
+    background: #ffffff;
+    width: 30%;
+    text-align: center;
     border: 2px solid #212121;
     border-radius: 6px;
 }

@@ -119,8 +119,10 @@ class Friends extends React.Component {
             );
         } else {
             return (
-                <div className="empty-friends">
-                    no friends or friend requests yet
+                <div className="empty-friends-container">
+                    <div className="empty-friends">
+                        no friends or friend requests yet
+                    </div>
                 </div>
             );
         }

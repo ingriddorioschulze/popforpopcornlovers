@@ -27,6 +27,34 @@ class Chat extends React.Component {
     }
 
     render() {
+        let chatMessages;
+
+        if (this.props.chatMessages.length === 0) {
+            chatMessages = <div className="empty-chat">no chats</div>;
+        } else {
+            chatMessages = (
+                <div className="chat-area">
+                    {this.props.chatMessages.map((message, i) => (
+                        <div className="chat-content" key={i}>
+                            <img
+                                className="chat-image"
+                                src={message.users_image}
+                            />
+                            <div className="chat-name">
+                                {message.first_name} {message.last_name} |{" "}
+                                <ChatTime time={message.timestamp} />
+                                <br />
+                                <div className="chat-message">
+                                    {message.chat}
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
         return (
             <div className="chat">
                 <div
@@ -36,25 +64,7 @@ class Chat extends React.Component {
                     <Link className="chat-others-online" to="/online">
                         see other poplovers online
                     </Link>
-                    <div className="chat-area">
-                        {this.props.chatMessages.map((message, i) => (
-                            <div className="chat-content" key={i}>
-                                <img
-                                    className="chat-image"
-                                    src={message.users_image}
-                                />
-                                <div className="chat-name">
-                                    {message.first_name} {message.last_name} |{" "}
-                                    <ChatTime time={message.timestamp} />
-                                    <br />
-                                    <div className="chat-message">
-                                        {message.chat}
-                                    </div>
-                                </div>
-                                <br />
-                            </div>
-                        ))}
-                    </div>
+                    {chatMessages}
                 </div>
                 <div className="chat-textarea-container">
                     <textarea
