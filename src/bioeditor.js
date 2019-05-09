@@ -17,14 +17,10 @@ export default class BioEditor extends React.Component {
     }
 
     save() {
-        axios
-            .put("/editbio", {
-                bio: this.state.draft
-            })
-            .then(() => {
-                this.props.setBio(this.state.draft);
-                this.setState({ editing: false });
-            });
+        axios.put("/editbio", { bio: this.state.draft }).then(() => {
+            this.props.setBio(this.state.draft);
+            this.setState({ editing: false });
+        });
     }
     render() {
         if (this.state.editing === true) {

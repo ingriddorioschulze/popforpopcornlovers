@@ -3,15 +3,15 @@ import { HashRouter, Route } from "react-router-dom";
 import Registration from "./registration";
 import Login from "./login";
 import Logo from "./logo";
-// import * as popCornMachine from "./popCornMachine";
+import * as popCornMachine from "./popCornMachine";
 
 class Welcome extends React.Component {
-    // componentDidMount() {
-    //     popCornMachine.start();
-    // }
-    // componentWillUnmount() {
-    //     popCornMachine.reset();
-    // }
+    componentDidMount() {
+        popCornMachine.start();
+    }
+    componentWillUnmount() {
+        popCornMachine.reset();
+    }
 
     render() {
         return (

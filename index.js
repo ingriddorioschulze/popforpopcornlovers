@@ -244,7 +244,33 @@ app.get("/api/search", loggedIn, (req, res) => {
     db.search(req.query.text).then(results => res.json(results));
 });
 
-////////////////////ONLINE USERS ROUTE////////////////////
+//////////////////// WALL POST////////////////////
+
+function areFriends(req, res, next) {
+    if (req.session.userId === parseInt(req.params.recipient)) {
+        next();
+    } else {
+        db.checkFriendship(req.session.userId, req.params.recipient).then(
+            areFriends => {
+                if (!areFriends) {
+                    return res.sendStatus(403);
+                } else {
+                    next();
+                }
+            }
+        );
+    }
+}
+
+app.post("/api/wall/:recipient", loggedIn, areFriends, (req, res) => {
+    db.createPost(req.session.userId, req.params.recipient, req.body.post).then(
+        post => res.json(post)
+    );
+});
+
+app.get("/api/wall/:recipient", loggedIn, areFriends, (req, res) => {
+    db.getPosts(req.params.recipient).then(showPosts => res.json(showPosts));
+});
 
 ////////////////////EVERYTHING ROUTE////////////////////
 

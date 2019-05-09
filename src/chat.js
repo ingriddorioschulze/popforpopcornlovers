@@ -1,35 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { socket } from "./socketClient";
-import * as moment from "moment";
-
-class ChatTime extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            time: new Date()
-        };
-        // this.handleInput = this.handleInput.bind(this);
-    }
-
-    componentDidMount() {
-        this.interval = setInterval(() => {
-            this.setState({ time: new Date() });
-        }, 5000);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
-
-    render() {
-        return (
-            <span className="chat-timestamp">
-                {moment(this.props.time).fromNow()}
-            </span>
-        );
-    }
-}
+import { Link } from "react-router-dom";
+import ChatTime from "./chatTime";
 
 class Chat extends React.Component {
     constructor(props) {
@@ -55,28 +28,41 @@ class Chat extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>chat!</h1>
+            <div className="chat">
                 <div
                     className="chat-container"
                     ref={chatsContainer => (this.myDiv = chatsContainer)}
                 >
-                    {this.props.chatMessages.map((message, i) => (
-                        <div key={i}>
-                            <div>
-                                {message.first_name} {message.last_name}
+                    <Link className="chat-others-online" to="/online">
+                        see other poplovers online
+                    </Link>
+                    <div className="chat-area">
+                        {this.props.chatMessages.map((message, i) => (
+                            <div className="chat-content" key={i}>
+                                <img
+                                    className="chat-image"
+                                    src={message.users_image}
+                                />
+                                <div className="chat-name">
+                                    {message.first_name} {message.last_name} |{" "}
+                                    <ChatTime time={message.timestamp} />
+                                    <br />
+                                    <div className="chat-message">
+                                        {message.chat}
+                                    </div>
+                                </div>
+                                <br />
                             </div>
-                            <img
-                                className="chat-image"
-                                src={message.users_image}
-                            />
-                            <span className="chat-message">{message.chat}</span>
-                            <br />
-                            <ChatTime time={message.timestamp} />
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-                <textarea onKeyDown={this.handleInput} />
+                <div className="chat-textarea-container">
+                    <textarea
+                        className="chat-textarea"
+                        placeholder="write here your message"
+                        onKeyDown={this.handleInput}
+                    />
+                </div>
             </div>
         );
     }

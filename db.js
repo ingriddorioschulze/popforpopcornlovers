@@ -121,8 +121,39 @@ exports.search = function(text) {
 };
 
 exports.getUsersByIds = function(arrayOfIds) {
-    const query = `SELECT id, first_name, last_name, users_image 
+    const q = `SELECT id, first_name, last_name, users_image 
     FROM users 
     WHERE id = ANY($1)`;
-    return db.query(query, [arrayOfIds]);
+    return db.query(q, [arrayOfIds]);
+};
+
+exports.checkFriendship = function(id_sender, id_recipient) {
+    const q = `SELECT id 
+    FROM friends 
+    WHERE (request_accepted = true)
+    AND ((id_sender = $1 AND id_recipient = $2) OR
+    (id_sender = $2 AND id_recipient = $1))`;
+    const params = [id_sender, id_recipient];
+    return db.query(q, params).then(result => result.rows.length > 0);
+};
+
+exports.createPost = function(id_sender, id_recipient, post) {
+    const q = `INSERT INTO posts (id_sender, id_recipient, post, time)
+    VALUES ($1, $2, $3, now()) RETURNING id, time`;
+    const params = [id_sender, id_recipient, post];
+    return db.query(q, params).then(result => {
+        return result.rows[0];
+    });
+};
+
+exports.getPosts = function(id_recipient) {
+    const q = `SELECT posts.id AS id, post, posts.time AS time, users_image, first_name, last_name
+    FROM posts
+    JOIN users ON users.id = id_sender
+    WHERE id_recipient = $1 
+    ORDER BY time DESC`;
+    const params = [id_recipient];
+    return db.query(q, params).then(result => {
+        return result.rows;
+    });
 };

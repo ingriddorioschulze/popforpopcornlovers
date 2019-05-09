@@ -9,15 +9,24 @@ class Online extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div>Online Now</div>
-                {this.props.onlineUsers.map(user => (
-                    <div key={user.id}>
-                        <div>
-                            {user.first_name} {user.last_name}
+                <div>
+                    <div className="online-now-container">
+                        <div className="online-now-text">poplobvers online</div>
+                        <div className="online-now-area">
+                            {this.props.onlineUsers.map(user => (
+                                <div key={user.id}>
+                                    <img
+                                        className="online-now-image"
+                                        src={user.users_image}
+                                    />
+                                    <div className="online-now-name">
+                                        {user.first_name} {user.last_name}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                        <img src={user.users_image} />
                     </div>
-                ))}
+                </div>
             </React.Fragment>
         );
     }

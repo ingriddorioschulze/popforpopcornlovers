@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "./axios";
 import FriendButton from "./friendbutton";
+import Wall from "./wall";
 
 export default class OtherProfile extends React.Component {
     constructor(props) {
@@ -63,6 +64,7 @@ export default class OtherProfile extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Wall user={this.props.match.params.id} />
             </React.Fragment>
         );
     }

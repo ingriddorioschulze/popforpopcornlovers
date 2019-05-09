@@ -1,15 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 import { loadFriends, acceptRequest, unfriend } from "./actions";
+import { Link } from "react-router-dom";
 
 const FriendRequest = ({ friendRequest, accept }) => (
     <div>
-        <img
-            className="friend-requests-image"
-            src={friendRequest.users_image}
-        />
+        <Link to={`/user/${friendRequest.id}`}>
+            <img
+                className="friend-requests-image"
+                src={friendRequest.users_image}
+            />
+        </Link>
         <div className="friend-requests-name">
-            {`${friendRequest.first_name} ${friendRequest.last_name}`}
+            <Link to={`/user/${friendRequest.id}`}>
+                {`${friendRequest.first_name} ${friendRequest.last_name}`}{" "}
+            </Link>
+
             <br />
             <button
                 onClick={() => accept(friendRequest.id)}
@@ -23,9 +29,14 @@ const FriendRequest = ({ friendRequest, accept }) => (
 
 const Friend = ({ friend, unfriend }) => (
     <div>
-        <img className="friend-image" src={friend.users_image} />
+        <Link to={`/user/${friend.id}`}>
+            <img className="friend-image" src={friend.users_image} />
+        </Link>
         <div className="friend-name">
-            {`${friend.first_name} ${friend.last_name}`}
+            <Link to={`/user/${friend.id}`}>
+                {`${friend.first_name} ${friend.last_name}`}{" "}
+            </Link>
+
             <br />
             <button
                 onClick={() => unfriend(friend.id)}

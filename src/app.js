@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import Friends from "./friends";
 import Chat from "./chat";
 import Online from "./online";
+import Wall from "./wall";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -59,6 +60,12 @@ export default class App extends React.Component {
                             >
                                 friends
                             </Link>
+                            <Link
+                                className="header-profile-button"
+                                to="/profile"
+                            >
+                                profile
+                            </Link>
                             <Link className="header-chat-button" to="/chat">
                                 chat
                             </Link>
@@ -75,6 +82,10 @@ export default class App extends React.Component {
                             <Route
                                 exact
                                 path="/"
+                                render={() => <Wall user={this.state.id} />}
+                            />
+                            <Route
+                                path="/profile"
                                 render={() => (
                                     <Profile
                                         profilePic={profilePic}
