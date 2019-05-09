@@ -27,6 +27,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .welcome-container .logo {
@@ -553,7 +554,9 @@ body {
 /* /////// POPCORN MACHINE /////// */
 
 .popcorn-machine-origin {
-    position: relative;
+    position: absolute;
+    top: 12.5%;
+    z-index: -1;
 }
 
 .kernel {
