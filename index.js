@@ -52,8 +52,6 @@ if (process.env.NODE_ENV != "production") {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
-////////////////////CSURF////////////////////
-
 app.use(csurf());
 
 app.use(function(req, res, next) {
@@ -64,8 +62,6 @@ app.use(function(req, res, next) {
 app.use(express.static("./public"));
 app.use(express.json());
 
-////////////////////WELCOME ROUTE////////////////////
-
 app.get("/welcome", (req, res) => {
     if (req.session.userId) {
         res.redirect("/");
@@ -73,8 +69,6 @@ app.get("/welcome", (req, res) => {
         res.sendFile(__dirname + "/index.html");
     }
 });
-
-////////////////////REGISTER ROUTE////////////////////
 
 app.post("/register", (req, res) => {
     password
@@ -96,7 +90,6 @@ app.post("/register", (req, res) => {
             res.sendStatus(500);
         });
 });
-////////////////////LOGIN ROUTE////////////////////
 
 app.post("/login", (req, res) => {
     db.getUser(req.body.email).then(user => {
@@ -118,8 +111,6 @@ app.post("/login", (req, res) => {
     });
 });
 
-////////////////////LOGOUT ROUTE////////////////////
-
 app.post("/logout", (req, res) => {
     req.session = null;
     res.redirect("/register");
@@ -133,15 +124,11 @@ function loggedIn(req, res, next) {
     }
 }
 
-////////////////////USERS ROUTE////////////////////
-
 app.get("/users", loggedIn, (req, res) => {
     db.getUserData(req.session.userId).then(usersImage => {
         res.json(usersImage);
     });
 });
-
-////////////////////UPLOAD PICTURE ROUTE////////////////////
 
 app.post(
     "/uploadProfilePicture",
@@ -167,15 +154,11 @@ app.post(
     }
 );
 
-////////////////////BIO ROUTE////////////////////
-
 app.put("/editbio", loggedIn, (req, res) => {
     db.updateBio(req.body.bio, req.session.userId).then(() => {
         res.sendStatus(200);
     });
 });
-
-////////////////////OTHER USERS ROUTE////////////////////
 
 app.get("/api/user/:id", loggedIn, (req, res) => {
     if (req.session.userId == req.params.id) {
@@ -194,15 +177,11 @@ app.get("/api/user/:id", loggedIn, (req, res) => {
         });
 });
 
-////////////////////FRIENDS ROUTE////////////////////
-
 app.get("/api/friend/:recipient", loggedIn, (req, res) => {
     db.getFriendRequest(req.session.userId, req.params.recipient).then(
         friendRequest => res.json(friendRequest)
     );
 });
-
-////////////////////SEND FRIEND REQUEST ROUTE////////////////////
 
 app.post("/api/friend/:recipient/send", loggedIn, (req, res) => {
     db.createFriendRequest(req.session.userId, req.params.recipient).then(() =>
@@ -210,21 +189,17 @@ app.post("/api/friend/:recipient/send", loggedIn, (req, res) => {
     );
 });
 
-////////////////////UNFRIEND ROUTE////////////////////
-
 app.post("/api/friend/:recipient/unfriend", loggedIn, (req, res) => {
     db.removeFriendRequest(req.session.userId, req.params.recipient).then(() =>
         res.sendStatus(200)
     );
 });
-////////////////////CANCEL FRIEND REQUEST ROUTE////////////////////
 
 app.post("/api/friend/:recipient/cancel", loggedIn, (req, res) => {
     db.removeFriendRequest(req.session.userId, req.params.recipient).then(() =>
         res.sendStatus(200)
     );
 });
-////////////////////ACCEPT FRIEND REQUEST ROUTE////////////////////
 
 app.post("/api/friend/:recipient/accept", loggedIn, (req, res) => {
     db.acceptFriendRequest(req.session.userId, req.params.recipient).then(() =>
@@ -232,19 +207,13 @@ app.post("/api/friend/:recipient/accept", loggedIn, (req, res) => {
     );
 });
 
-////////////////////FRIENDS ROUTE////////////////////
-
 app.get("/api/friends", loggedIn, (req, res) => {
     db.getFriends(req.session.userId).then(friends => res.json(friends));
 });
 
-////////////////////SEARCH ROUTE////////////////////
-
 app.get("/api/search", loggedIn, (req, res) => {
     db.search(req.query.text).then(results => res.json(results));
 });
-
-//////////////////// WALL POST////////////////////
 
 function areFriends(req, res, next) {
     if (req.session.userId === parseInt(req.params.recipient)) {
@@ -271,8 +240,6 @@ app.post("/api/wall/:recipient", loggedIn, areFriends, (req, res) => {
 app.get("/api/wall/:recipient", loggedIn, areFriends, (req, res) => {
     db.getPosts(req.params.recipient).then(showPosts => res.json(showPosts));
 });
-
-////////////////////EVERYTHING ROUTE////////////////////
 
 app.get("*", (req, res) => {
     if (!req.session.userId) {

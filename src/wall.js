@@ -19,11 +19,6 @@ export default class Wall extends React.Component {
             .then(({ data }) => {
                 this.setState({ allowed: true, posts: data });
             });
-        // .catch(error => {
-        //     this.setState({
-        //         error: error.response.data
-        //     });
-        // });
     }
 
     componentDidMount() {

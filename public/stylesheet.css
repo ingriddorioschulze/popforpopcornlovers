@@ -20,8 +20,6 @@ body {
     margin: 0;
 }
 
-/* ///////WELCOME/////// */
-
 .welcome-container {
     display: flex;
     flex-direction: column;
@@ -47,8 +45,6 @@ body {
     margin-bottom: 40px;
     text-align: center;
 }
-
-/* ///////REGISTRATION/////// */
 
 .register-area {
     height: 515px;
@@ -166,8 +162,6 @@ body {
     padding: 40px 20px 20px 20px;
 }
 
-/* ///////LOGIN/////// */
-
 .login-area {
     height: 330px;
     width: 350px;
@@ -249,8 +243,6 @@ body {
     text-align: center;
     padding: 40px 20px 20px 20px;
 }
-
-/* /////// APP HEADER /////// */
 
 .app {
     display: flex;
@@ -374,8 +366,6 @@ body {
     font-weight: 600;
 }
 
-/* /////// PROFILE /////// */
-
 .profile {
     height: 400px;
     display: flex;
@@ -411,8 +401,6 @@ body {
     font-size: 30px;
     font-weight: bold;
 }
-
-/* /////// OTHER PROFILE /////// */
 
 .other-profile {
     height: 400px;
@@ -452,8 +440,6 @@ body {
     font-size: 20px;
 }
 
-/* /////// BIO /////// */
-
 .bio-edit {
     padding: 0 20px 20px 20px;
     font-size: 15px;
@@ -486,8 +472,6 @@ body {
     padding: 0;
     cursor: pointer;
 }
-
-/* /////// UPLOAD IMAGE MODAL /////// */
 
 .upload-image-area {
     top: 0;
@@ -551,8 +535,6 @@ body {
     white-space: nowrap;
 }
 
-/* /////// POPCORN MACHINE /////// */
-
 .popcorn-machine-origin {
     position: absolute;
     top: 12.5%;
@@ -562,8 +544,6 @@ body {
 .kernel {
     position: absolute;
 }
-
-/* /////// FRIENDSHIP BUTTON /////// */
 
 .friend-button {
     padding: 30px 30px 30px 0;
@@ -580,8 +560,6 @@ body {
     border: 2px solid black;
     cursor: pointer;
 }
-
-/* /////// FRIENDS PAGE /////// */
 
 .friends-container {
     display: flex;
@@ -723,8 +701,6 @@ body {
     border-radius: 6px;
 }
 
-/* /////// ONLINE /////// */
-
 .online-now-container {
     display: flex;
     flex-direction: column;
@@ -796,8 +772,6 @@ body {
     border: 2px solid #212121;
     border-radius: 6px;
 }
-
-/* /////// CHAT /////// */
 
 .chat-container {
     display: flex;
@@ -890,8 +864,6 @@ body {
     border-radius: 6px;
 }
 
-/* /////// WALL /////// */
-
 .posts-list-container {
     display: flex;
     flex-direction: column;
@@ -933,6 +905,7 @@ body {
     border-radius: 6px;
     object-fit: cover;
     object-position: center;
+    padding: 1px;
 }
 
 .posts-name {
@@ -985,8 +958,6 @@ body {
     padding: 0;
     margin-bottom: 30px;
 }
-
-/* /////// FOOTER /////// */
 
 main {
     min-height: calc(100vh - 135px);
