@@ -96,10 +96,16 @@ you need an AWS account to run the POP for popcorn lovers.
     }
     ```
 
-5.  start the application
+5.  start the application and the bundle server
 
     ```bash
     npm start
+    ```
+
+    in a new terminal
+
+    ```bash
+    node bundle-server.js
     ```
 
     now go to http://localhost:8080 in your browser
