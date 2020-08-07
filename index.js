@@ -9,28 +9,29 @@ const password = require("./password");
 const cookieSession = require("cookie-session");
 const csurf = require("csurf");
 const socket = require("./socket");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const diskStorage = multer.diskStorage({
-    destination: function(req, file, callback) {
+    destination: function (req, file, callback) {
         callback(null, __dirname + "/uploads");
     },
-    filename: function(req, file, callback) {
-        uidSafe(24).then(function(uid) {
+    filename: function (req, file, callback) {
+        uidSafe(24).then(function (uid) {
             callback(null, uid + path.extname(file.originalname));
         });
-    }
+    },
 });
 
 const uploader = multer({
     storage: diskStorage,
     limits: {
-        fileSize: 2097152
-    }
+        fileSize: 2097152,
+    },
 });
 
 const cookieSessionMiddleware = cookieSession({
     maxAge: 1000 * 60 * 60 * 24 * 24,
-    secret: `Isay:Hey!Whatisgoingon?`
+    secret: `Isay:Hey!Whatisgoingon?`,
 });
 
 const app = express();
@@ -44,8 +45,8 @@ app.use(compression());
 if (process.env.NODE_ENV != "production") {
     app.use(
         "/bundle.js",
-        require("http-proxy-middleware")({
-            target: "http://localhost:8081/"
+        createProxyMiddleware({
+            target: "http://localhost:8081/",
         })
     );
 } else {
@@ -54,7 +55,7 @@ if (process.env.NODE_ENV != "production") {
 
 app.use(csurf());
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.cookie("mytoken", req.csrfToken());
     next();
 });
@@ -73,7 +74,7 @@ app.get("/welcome", (req, res) => {
 app.post("/register", (req, res) => {
     password
         .hashPassword(req.body.password)
-        .then(hashedPassword => {
+        .then((hashedPassword) => {
             return db.registerUser(
                 req.body.firstname,
                 req.body.lastname,
@@ -82,7 +83,7 @@ app.post("/register", (req, res) => {
                 new Date()
             );
         })
-        .then(userId => {
+        .then((userId) => {
             req.session.userId = userId;
             res.redirect("/");
         })
@@ -92,14 +93,14 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    db.getUser(req.body.email).then(user => {
+    db.getUser(req.body.email).then((user) => {
         if (user == null) {
             return res.status(400).json({ error: "user not found" });
         }
 
         password
             .checkPassword(req.body.password, user.password)
-            .then(doesMatch => {
+            .then((doesMatch) => {
                 if (doesMatch == true) {
                     req.session.userId = user.id;
 
@@ -125,7 +126,7 @@ function loggedIn(req, res, next) {
 }
 
 app.get("/users", loggedIn, (req, res) => {
-    db.getUserData(req.session.userId).then(usersImage => {
+    db.getUserData(req.session.userId).then((usersImage) => {
         res.json(usersImage);
     });
 });
@@ -136,19 +137,19 @@ app.post(
     uploader.single("picture"),
     (req, res) => {
         s3.uploadImage(req.file.path, req.file.filename)
-            .then(url => {
+            .then((url) => {
                 return db
                     .updateProfilePicture(url, req.session.userId)
                     .then(() => {
                         res.json({
-                            url: url
+                            url: url,
                         });
                     });
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error);
                 res.status(500).json({
-                    message: "Upload failed."
+                    message: "Upload failed.",
                 });
             });
     }
@@ -165,7 +166,7 @@ app.get("/api/user/:id", loggedIn, (req, res) => {
         return res.status(400).json({ error: "Can't access yourself!" });
     }
     db.getUserData(req.params.id)
-        .then(userData => {
+        .then((userData) => {
             if (!userData) {
                 res.sendStatus(404);
             } else {
@@ -178,9 +179,10 @@ app.get("/api/user/:id", loggedIn, (req, res) => {
 });
 
 app.get("/api/friend/:recipient", loggedIn, (req, res) => {
-    db.getFriendRequest(req.session.userId, req.params.recipient).then(
-        friendRequest => res.json(friendRequest)
-    );
+    db.getFriendRequest(
+        req.session.userId,
+        req.params.recipient
+    ).then((friendRequest) => res.json(friendRequest));
 });
 
 app.post("/api/friend/:recipient/send", loggedIn, (req, res) => {
@@ -208,11 +210,11 @@ app.post("/api/friend/:recipient/accept", loggedIn, (req, res) => {
 });
 
 app.get("/api/friends", loggedIn, (req, res) => {
-    db.getFriends(req.session.userId).then(friends => res.json(friends));
+    db.getFriends(req.session.userId).then((friends) => res.json(friends));
 });
 
 app.get("/api/search", loggedIn, (req, res) => {
-    db.search(req.query.text).then(results => res.json(results));
+    db.search(req.query.text).then((results) => res.json(results));
 });
 
 function areFriends(req, res, next) {
@@ -220,7 +222,7 @@ function areFriends(req, res, next) {
         next();
     } else {
         db.checkFriendship(req.session.userId, req.params.recipient).then(
-            areFriends => {
+            (areFriends) => {
                 if (!areFriends) {
                     return res.sendStatus(403);
                 } else {
@@ -232,13 +234,15 @@ function areFriends(req, res, next) {
 }
 
 app.post("/api/wall/:recipient", loggedIn, areFriends, (req, res) => {
-    db.createPost(req.session.userId, req.params.recipient, req.body.post).then(
-        post => res.json(post)
-    );
+    db.createPost(
+        req.session.userId,
+        req.params.recipient,
+        req.body.post
+    ).then((post) => res.json(post));
 });
 
 app.get("/api/wall/:recipient", loggedIn, areFriends, (req, res) => {
-    db.getPosts(req.params.recipient).then(showPosts => res.json(showPosts));
+    db.getPosts(req.params.recipient).then((showPosts) => res.json(showPosts));
 });
 
 app.get("*", (req, res) => {
